@@ -21,15 +21,15 @@ const Events = () => {
         </div>
 
         <div className="bg-white shadow-md rounded-xl p-6 border">
-          <h2 className="text-2xl font-semibold text-orange-500 mb-2">Fundraiser Gala</h2>
+          <h2 className="text-2xl font-semibold text-orange-500 mb-2">Spirit Night</h2>
           <p className="text-gray-700 mb-1">
-            🗓️ <strong>Date:</strong> May 25, 2025 @ 6 PM
+            🗓️ <strong>Date:</strong> April 18, 2024
           </p>
           <p className="text-gray-700 mb-1">
-            📍 <strong>Location:</strong> East Orlando Community Hall
+            📍 <strong>Location:</strong> Portillo’s – Waterford Lakes, Orlando, FL
           </p>
           <p className="text-gray-700">
-            A night of dinner, raffles, and community — all to raise money for our furry friends.
+            Mention Catapalooza at checkout and a portion of the proceeds will go to the nonprofit!
           </p>
         </div>
 

@@ -1,4 +1,3 @@
-// src/UploadCat.jsx
 import React, { useState, useEffect } from 'react';
 import { storage, db } from './firebase';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
@@ -9,11 +8,11 @@ const UploadCat = () => {
   const [password, setPassword] = useState('');
   const [catName, setCatName] = useState('');
   const [description, setDescription] = useState('');
+  const [adoptLink, setAdoptLink] = useState('');
   const [image, setImage] = useState(null);
   const [status, setStatus] = useState('');
   const [cats, setCats] = useState([]);
 
-  // Fetch cats for admin view
   useEffect(() => {
     if (authorized) {
       const fetchCats = async () => {
@@ -38,8 +37,8 @@ const UploadCat = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!catName || !description || !image) {
-      setStatus('Please fill out all fields and select an image.');
+    if (!catName || !description || !image || !adoptLink) {
+      setStatus('Please fill out all fields including the adoption link.');
       return;
     }
 
@@ -51,6 +50,7 @@ const UploadCat = () => {
       await addDoc(collection(db, 'cats'), {
         name: catName,
         description,
+        adoptLink,
         imageUrl,
         imagePath: imageRef.fullPath,
         createdAt: Timestamp.now(),
@@ -59,9 +59,9 @@ const UploadCat = () => {
       setStatus('✅ Cat uploaded successfully!');
       setCatName('');
       setDescription('');
+      setAdoptLink('');
       setImage(null);
 
-      // Refresh list
       const snapshot = await getDocs(collection(db, 'cats'));
       setCats(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     } catch (error) {
@@ -121,7 +121,14 @@ const UploadCat = () => {
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full border border-gray-300 rounded px-4 py-2 h-32"
+          className="w-full border border-gray-300 rounded px-4 py-2 h-24"
+        />
+        <input
+          type="url"
+          placeholder="Adoption Link (Wagtopia)"
+          value={adoptLink}
+          onChange={(e) => setAdoptLink(e.target.value)}
+          className="w-full border border-gray-300 rounded px-4 py-2"
         />
         <input
           type="file"
@@ -138,7 +145,6 @@ const UploadCat = () => {
         {status && <p className="mt-4 text-sm text-center">{status}</p>}
       </form>
 
-      {/* Admin Cat List */}
       <div className="mt-16">
         <h2 className="text-2xl font-bold mb-6 text-center">Manage Uploaded Cats</h2>
         {cats.length === 0 ? (
@@ -153,7 +159,17 @@ const UploadCat = () => {
                   className="w-full h-60 object-cover rounded-lg mb-4"
                 />
                 <h3 className="text-xl font-bold mb-1">{cat.name}</h3>
-                <p className="text-sm mb-3 text-gray-700">{cat.description}</p>
+                <p className="text-sm mb-2 text-gray-700">{cat.description}</p>
+                {cat.adoptLink && (
+                  <a
+                    href={cat.adoptLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-orange-500 underline text-sm block mb-3"
+                  >
+                    View on Wagtopia
+                  </a>
+                )}
                 <button
                   onClick={() => handleDelete(cat.id, cat.imagePath)}
                   className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"

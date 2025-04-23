@@ -55,7 +55,13 @@ const Cats = () => {
                 alt={cat.name}
                 className="w-full h-60 object-cover rounded-lg mb-4"
               />
-              <h2 className="text-xl font-bold mb-2 text-[#1D3557]">{cat.name}</h2>
+              <h2 className="text-xl font-bold mb-1 text-[#1D3557]">{cat.name}</h2>
+              {/* NEW: Bold gray line for sex – age – breed */}
+              {(cat.sex || cat.age || cat.breed) && (
+                <p className="text-sm font-semibold text-gray-600 mb-2">
+                  {cat.sex} {cat.age && `– ${cat.age}`} {cat.breed && `– ${cat.breed}`}
+                </p>
+              )}
               <p className="text-sm text-gray-700 mb-3">{cat.description}</p>
               {cat.adoptLink && (
                 <a

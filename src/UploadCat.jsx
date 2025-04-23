@@ -8,6 +8,9 @@ const UploadCat = () => {
   const [authorized, setAuthorized] = useState(false);
   const [password, setPassword] = useState('');
   const [catName, setCatName] = useState('');
+  const [sex, setSex] = useState('');
+  const [age, setAge] = useState('');
+  const [breed, setBreed] = useState('');
   const [description, setDescription] = useState('');
   const [adoptLink, setAdoptLink] = useState('');
   const [image, setImage] = useState(null);
@@ -38,8 +41,8 @@ const UploadCat = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!catName || !description || !image || !adoptLink) {
-      setStatus('Please fill out all fields including the adoption link.');
+    if (!catName || !sex || !age || !breed || !description || !image || !adoptLink) {
+      setStatus('Please fill out all fields.');
       return;
     }
 
@@ -50,6 +53,9 @@ const UploadCat = () => {
 
       await addDoc(collection(db, 'cats'), {
         name: catName,
+        sex,
+        age,
+        breed,
         description,
         adoptLink,
         imageUrl,
@@ -59,6 +65,9 @@ const UploadCat = () => {
 
       setStatus('✅ Cat uploaded successfully!');
       setCatName('');
+      setSex('');
+      setAge('');
+      setBreed('');
       setDescription('');
       setAdoptLink('');
       setImage(null);
@@ -93,10 +102,7 @@ const UploadCat = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full border border-gray-300 px-4 py-2 rounded"
           />
-          <button
-            type="submit"
-            className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557] transition"
-          >
+          <button type="submit" className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557]">
             Enter
           </button>
         </form>
@@ -107,9 +113,7 @@ const UploadCat = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10 pt-32 text-gray-800">
-      <h2 className="text-3xl font-bold mb-6 text-center text-[#277DA1]">
-        Upload a Cat for Adoption
-      </h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-[#277DA1]">Upload a Cat for Adoption</h2>
       <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mx-auto">
         <input
           type="text"
@@ -118,12 +122,41 @@ const UploadCat = () => {
           onChange={(e) => setCatName(e.target.value)}
           className="w-full border border-gray-300 rounded px-4 py-2"
         />
+
+        <div className="flex space-x-4">
+          <label className="flex items-center space-x-2">
+            <input type="radio" value="Male" checked={sex === 'Male'} onChange={(e) => setSex(e.target.value)} />
+            <span>Male</span>
+          </label>
+          <label className="flex items-center space-x-2">
+            <input type="radio" value="Female" checked={sex === 'Female'} onChange={(e) => setSex(e.target.value)} />
+            <span>Female</span>
+          </label>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Age (e.g. 7 months)"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          className="w-full border border-gray-300 rounded px-4 py-2"
+        />
+
+        <input
+          type="text"
+          placeholder="Breed (e.g. DSH)"
+          value={breed}
+          onChange={(e) => setBreed(e.target.value)}
+          className="w-full border border-gray-300 rounded px-4 py-2"
+        />
+
         <textarea
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full border border-gray-300 rounded px-4 py-2 h-24"
         />
+
         <input
           type="url"
           placeholder="Adoption Link (Wagtopia)"
@@ -131,18 +164,18 @@ const UploadCat = () => {
           onChange={(e) => setAdoptLink(e.target.value)}
           className="w-full border border-gray-300 rounded px-4 py-2"
         />
+
         <input
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
           className="block"
         />
-        <button
-          type="submit"
-          className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557] transition"
-        >
+
+        <button type="submit" className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557]">
           Upload Cat
         </button>
+
         {status && <p className="mt-4 text-sm text-center">{status}</p>}
       </form>
 
@@ -154,12 +187,10 @@ const UploadCat = () => {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {cats.map((cat) => (
               <div key={cat.id} className="bg-white rounded-xl shadow p-4 text-center">
-                <img
-                  src={cat.imageUrl}
-                  alt={cat.name}
-                  className="w-full h-60 object-cover rounded-lg mb-4"
-                />
+                <img src={cat.imageUrl} alt={cat.name} className="w-full h-60 object-cover rounded-lg mb-4" />
                 <h3 className="text-xl font-bold mb-1 text-[#1D3557]">{cat.name}</h3>
+                <p className="text-sm font-semibold text-gray-600 mb-1">                  {cat.sex} – {cat.age} – {cat.breed}
+                </p>
                 <p className="text-sm mb-2 text-gray-700">{cat.description}</p>
                 {cat.adoptLink && (
                   <a

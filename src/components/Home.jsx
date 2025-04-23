@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import catPhoto from '../assets/IMG_7350.jpg';
+
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -17,13 +18,13 @@ const Home = () => {
     <div className="text-gray-800">
       {/* Hero Section */}
       <motion.section
-        className="bg-yellow-100 py-20 px-4 text-center"
+        className="bg-[#D7EAF5] py-20 px-4 text-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={fadeUp}
       >
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 text-[#1D3557]">
           Supporting Cats. Creating Community.
         </h1>
         <p className="text-lg md:text-xl max-w-xl mx-auto mb-6">
@@ -31,12 +32,12 @@ const Home = () => {
         </p>
         <div className="flex justify-center gap-4">
           <Link to="/help">
-            <button className="bg-orange-500 text-white py-2 px-6 rounded-xl hover:bg-orange-600 transition">
+            <button className="bg-[#3C8DBC] text-white py-2 px-6 rounded-xl hover:bg-[#1D3557] transition">
               Donate
             </button>
           </Link>
           <Link to="/about">
-            <button className="border-2 border-orange-500 text-orange-500 py-2 px-6 rounded-xl hover:bg-orange-100 transition">
+            <button className="border-2 border-[#3C8DBC] text-[#3C8DBC] py-2 px-6 rounded-xl hover:bg-[#B6D9EF] transition">
               Learn More
             </button>
           </Link>
@@ -51,8 +52,8 @@ const Home = () => {
         viewport={{ once: true }}
         variants={fadeUp}
       >
-        <h2 className="text-3xl font-bold mb-2">About Catapalooza</h2>
-        <div className="w-20 h-1 bg-orange-400 mx-auto mb-6 rounded"></div>
+        <h2 className="text-3xl font-bold mb-2 text-[#1D3557]">About Catapalooza</h2>
+        <div className="w-20 h-1 bg-[#3C8DBC] mx-auto mb-6 rounded"></div>
         <p className="text-lg mb-8">
           We're a group of passionate volunteers committed to improving the lives of stray and abandoned cats. Our mission is to create a loving, safe space for every feline we help.
         </p>
@@ -81,7 +82,7 @@ const Home = () => {
         variants={fadeUp}
       >
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Upcoming Events</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-[#1D3557]">Upcoming Events</h2>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="bg-white p-6 rounded-lg shadow">
               <h3 className="text-xl font-bold mb-2">Adoption Day</h3>
@@ -113,7 +114,7 @@ const Home = () => {
         viewport={{ once: true }}
         variants={fadeUp}
       >
-        <h2 className="text-3xl font-bold mb-8 text-center">How You Can Help</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center text-[#1D3557]">How You Can Help</h2>
         <div className="grid gap-6 md:grid-cols-3 text-center">
           <div>
             <h3 className="text-xl font-bold mb-2">Donate</h3>

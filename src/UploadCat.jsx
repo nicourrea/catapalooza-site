@@ -1,3 +1,4 @@
+// src/UploadCat.jsx
 import React, { useState, useEffect } from 'react';
 import { storage, db } from './firebase';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
@@ -83,7 +84,7 @@ const UploadCat = () => {
   if (!authorized) {
     return (
       <div className="max-w-sm mx-auto py-32 text-center text-gray-800">
-        <h2 className="text-2xl font-bold mb-4 text-orange-500">Admin Login</h2>
+        <h2 className="text-2xl font-bold mb-4 text-[#277DA1]">Admin Login</h2>
         <form onSubmit={handlePasswordSubmit} className="space-y-4">
           <input
             type="password"
@@ -94,7 +95,7 @@ const UploadCat = () => {
           />
           <button
             type="submit"
-            className="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600 transition"
+            className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557] transition"
           >
             Enter
           </button>
@@ -106,7 +107,7 @@ const UploadCat = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10 pt-32 text-gray-800">
-      <h2 className="text-3xl font-bold mb-6 text-center text-orange-500">
+      <h2 className="text-3xl font-bold mb-6 text-center text-[#277DA1]">
         Upload a Cat for Adoption
       </h2>
       <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mx-auto">
@@ -138,7 +139,7 @@ const UploadCat = () => {
         />
         <button
           type="submit"
-          className="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600 transition"
+          className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557] transition"
         >
           Upload Cat
         </button>
@@ -146,7 +147,7 @@ const UploadCat = () => {
       </form>
 
       <div className="mt-16">
-        <h2 className="text-2xl font-bold mb-6 text-center">Manage Uploaded Cats</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-[#1D3557]">Manage Uploaded Cats</h2>
         {cats.length === 0 ? (
           <p className="text-center text-gray-500">No cats available.</p>
         ) : (
@@ -158,14 +159,14 @@ const UploadCat = () => {
                   alt={cat.name}
                   className="w-full h-60 object-cover rounded-lg mb-4"
                 />
-                <h3 className="text-xl font-bold mb-1">{cat.name}</h3>
+                <h3 className="text-xl font-bold mb-1 text-[#1D3557]">{cat.name}</h3>
                 <p className="text-sm mb-2 text-gray-700">{cat.description}</p>
                 {cat.adoptLink && (
                   <a
                     href={cat.adoptLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-orange-500 underline text-sm block mb-3"
+                    className="text-[#277DA1] underline text-sm block mb-3"
                   >
                     View on Wagtopia
                   </a>

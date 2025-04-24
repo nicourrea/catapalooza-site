@@ -10,6 +10,11 @@ import Contact from './components/Contact';
 import Cats from './components/Cats';
 import UploadCat from './UploadCat'; // ✅ Import UploadCat
 import Footer from './components/Footer'; // ✅ Import Footer
+import FAQs from './components/FAQs';
+import SocialMedia from './components/SocialMedia';
+import EmailUs from './components/EmailUs';
+
+
 
 export default function App() {
   return (
@@ -23,6 +28,9 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/cats" element={<Cats />} />
         <Route path="/upload" element={<UploadCat />} /> {/* ✅ Add UploadCat route */}
+        <Route path="/contact/faqs" element={<FAQs />} />
+        <Route path="/contact/social" element={<SocialMedia />} />
+        <Route path="/contact/email" element={<EmailUs />} />
       </Routes>
       <Footer /> {/* ✅ Add Footer below all routes */}
     </Router>

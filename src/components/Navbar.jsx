@@ -28,9 +28,9 @@ const Navbar = () => {
       label: 'Events',
       path: '/events',
       dropdown: [
-        { label: 'Upcoming Events', path: '/events' },
+        { label: 'Events Calendar', path: '/events/calendar' },
         { label: 'Past Highlights', path: '/events/highlights' },
-        { label: 'Team Up With Us', path: '/events/collab' },
+        { label: 'Team Up With Us', path: '/events/team-up' },
       ],
     },
     {

@@ -1,12 +1,9 @@
-// src/UploadCat.jsx
 import React, { useState, useEffect } from 'react';
 import { storage, db } from './firebase';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import { collection, addDoc, Timestamp, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore';
+import { collection, addDoc, Timestamp, getDocs, deleteDoc, doc, updateDoc, query, orderBy } from 'firebase/firestore';
 
 const UploadCat = () => {
-  const [authorized, setAuthorized] = useState(false);
-  const [password, setPassword] = useState('');
   const [catName, setCatName] = useState('');
   const [sex, setSex] = useState('');
   const [age, setAge] = useState('');
@@ -16,54 +13,59 @@ const UploadCat = () => {
   const [image, setImage] = useState(null);
   const [status, setStatus] = useState('');
   const [cats, setCats] = useState([]);
+  const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
-    if (authorized) {
-      const fetchCats = async () => {
-        const q = query(collection(db, 'cats'), orderBy('createdAt', 'desc'));
-        const snapshot = await getDocs(q);
-        const catList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setCats(catList);
-      };
-      fetchCats();
-    }
-  }, [authorized]);
-
-  const handlePasswordSubmit = (e) => {
-    e.preventDefault();
-    if (password === 'admin123') {
-      setAuthorized(true);
-      setStatus('');
-    } else {
-      setStatus('Incorrect password');
-    }
-  };
+    const fetchCats = async () => {
+      const q = query(collection(db, 'cats'), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      const catList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setCats(catList);
+    };
+    fetchCats();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!catName || !sex || !age || !breed || !description || !image || !adoptLink) {
+    if (!catName || !sex || !age || !breed || !description || (!image && !editingId) || !adoptLink) {
       setStatus('Please fill out all fields.');
       return;
     }
 
     try {
-      const imageRef = ref(storage, `cats/${Date.now()}_${image.name}`);
-      await uploadBytes(imageRef, image);
-      const imageUrl = await getDownloadURL(imageRef);
+      if (editingId) {
+        const catDoc = doc(db, 'cats', editingId);
+        let updateData = { name: catName, sex, age, breed, description, adoptLink };
 
-      await addDoc(collection(db, 'cats'), {
-        name: catName,
-        sex,
-        age,
-        breed,
-        description,
-        adoptLink,
-        imageUrl,
-        imagePath: imageRef.fullPath,
-        createdAt: Timestamp.now(),
-      });
+        if (image) {
+          const imageRef = ref(storage, `cats/${Date.now()}_${image.name}`);
+          await uploadBytes(imageRef, image);
+          const imageUrl = await getDownloadURL(imageRef);
+          updateData.imageUrl = imageUrl;
+          updateData.imagePath = imageRef.fullPath;
+        }
 
-      setStatus('✅ Cat uploaded successfully!');
+        await updateDoc(catDoc, updateData);
+        setStatus('✅ Cat updated successfully!');
+      } else {
+        const imageRef = ref(storage, `cats/${Date.now()}_${image.name}`);
+        await uploadBytes(imageRef, image);
+        const imageUrl = await getDownloadURL(imageRef);
+
+        await addDoc(collection(db, 'cats'), {
+          name: catName,
+          sex,
+          age,
+          breed,
+          description,
+          adoptLink,
+          imageUrl,
+          imagePath: imageRef.fullPath,
+          createdAt: Timestamp.now(),
+        });
+        setStatus('✅ Cat uploaded successfully!');
+      }
+
       setCatName('');
       setSex('');
       setAge('');
@@ -71,6 +73,7 @@ const UploadCat = () => {
       setDescription('');
       setAdoptLink('');
       setImage(null);
+      setEditingId(null);
 
       const snapshot = await getDocs(collection(db, 'cats'));
       setCats(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
@@ -90,30 +93,22 @@ const UploadCat = () => {
     }
   };
 
-  if (!authorized) {
-    return (
-      <div className="max-w-sm mx-auto py-32 text-center text-gray-800">
-        <h2 className="text-2xl font-bold mb-4 text-[#277DA1]">Admin Login</h2>
-        <form onSubmit={handlePasswordSubmit} className="space-y-4">
-          <input
-            type="password"
-            placeholder="Enter admin password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-gray-300 px-4 py-2 rounded"
-          />
-          <button type="submit" className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557]">
-            Enter
-          </button>
-        </form>
-        {status && <p className="mt-4 text-sm text-red-600">{status}</p>}
-      </div>
-    );
-  }
+  const handleEdit = (cat) => {
+    setCatName(cat.name);
+    setSex(cat.sex);
+    setAge(cat.age);
+    setBreed(cat.breed);
+    setDescription(cat.description);
+    setAdoptLink(cat.adoptLink);
+    setEditingId(cat.id);
+    setStatus('Editing mode enabled. Update and submit.');
+  };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 pt-32 text-gray-800">
-      <h2 className="text-3xl font-bold mb-6 text-center text-[#277DA1]">Upload a Cat for Adoption</h2>
+    <div className="max-w-6xl mx-auto px-6 py-10 text-gray-800">
+      <h2 className="text-3xl font-bold mb-6 text-center text-[#277DA1]">
+        {editingId ? 'Edit Cat' : 'Upload a Cat for Adoption'}
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mx-auto">
         <input
           type="text"
@@ -173,7 +168,7 @@ const UploadCat = () => {
         />
 
         <button type="submit" className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557]">
-          Upload Cat
+          {editingId ? 'Update Cat' : 'Upload Cat'}
         </button>
 
         {status && <p className="mt-4 text-sm text-center">{status}</p>}
@@ -189,7 +184,8 @@ const UploadCat = () => {
               <div key={cat.id} className="bg-white rounded-xl shadow p-4 text-center">
                 <img src={cat.imageUrl} alt={cat.name} className="w-full h-60 object-cover rounded-lg mb-4" />
                 <h3 className="text-xl font-bold mb-1 text-[#1D3557]">{cat.name}</h3>
-                <p className="text-sm font-semibold text-gray-600 mb-1">                  {cat.sex} – {cat.age} – {cat.breed}
+                <p className="text-sm font-semibold text-gray-600 mb-1">
+                  {cat.sex} – {cat.age} – {cat.breed}
                 </p>
                 <p className="text-sm mb-2 text-gray-700">{cat.description}</p>
                 {cat.adoptLink && (
@@ -202,12 +198,20 @@ const UploadCat = () => {
                     View on Wagtopia
                   </a>
                 )}
-                <button
-                  onClick={() => handleDelete(cat.id, cat.imagePath)}
-                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-                >
-                  Delete
-                </button>
+                <div className="flex justify-center gap-2">
+                  <button
+                    onClick={() => handleEdit(cat)}
+                    className="bg-yellow-400 text-white px-4 py-2 rounded hover:bg-yellow-500 transition"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(cat.id, cat.imagePath)}
+                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>

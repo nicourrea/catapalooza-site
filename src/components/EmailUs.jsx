@@ -1,30 +1,55 @@
 import React from 'react';
 import { FiMail } from 'react-icons/fi';
+import { FaClock, FaMapMarkerAlt, FaPaw } from 'react-icons/fa';
 
-const Email = () => {
+const EmailUs = () => {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-24 text-gray-800">
-      <h1 className="text-4xl font-bold text-center mb-8 text-[#1D3557]">Get in Touch</h1>
+    <div className="flex flex-col items-center px-4 pt-24 pb-10 bg-[#f9fbfc] text-[#1D3557]">
+      <h1 className="text-5xl font-extrabold mb-10 text-center">Let’s Connect</h1>
 
-      <div className="bg-[#f0f7fb] p-8 rounded-xl shadow-md text-center">
-        <p className="text-lg text-[#1D3557] mb-6">
-          Have a question about adoptions, donations, or volunteering? We’d love to hear from you!
-        </p>
+      <div className="bg-[#f0f7fb] max-w-2xl w-full p-10 rounded-2xl shadow-xl text-center space-y-10">
+        <div>
+          <p className="text-xl leading-relaxed">
+            Have a question about adoptions, donations, or volunteering?<br />
+            We’d love to hear from you!
+          </p>
 
-        <a
-          href="mailto:catapaloozatnr@gmail.com"
-          className="inline-flex items-center gap-3 bg-[#277DA1] hover:bg-[#1D3557] text-white px-6 py-3 rounded-lg font-semibold transition duration-300"
-        >
-          <FiMail className="text-2xl" />
-          Email catapaloozatnr@gmail.com
-        </a>
+          <a
+            href="mailto:catapaloozatnr@gmail.com"
+            className="mt-6 inline-flex items-center justify-center gap-3 bg-[#277DA1] hover:bg-[#1D3557] text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300"
+          >
+            <FiMail className="text-2xl" />
+            Email catapaloozatnr@gmail.com
+          </a>
 
-        <p className="mt-6 text-sm text-gray-600">
-          We typically respond within 24–48 hours. For urgent rescue situations, please include as much detail as possible.
-        </p>
+          <p className="mt-6 text-base text-gray-600 leading-relaxed">
+            We typically respond within 24–48 hours.<br />
+            For urgent rescue situations, please include as much detail as possible.
+          </p>
+        </div>
+
+        <div className="flex items-center justify-center gap-3 text-[#277DA1]">
+          <hr className="flex-grow border-gray-300" />
+          <FaPaw className="text-xl" />
+          <hr className="flex-grow border-gray-300" />
+        </div>
+
+        <div className="text-left space-y-4 text-base text-[#1D3557]">
+          <div className="flex items-start gap-2">
+            <FaClock className="mt-1 text-[#277DA1]" />
+            <p><strong>Adoption Hours:</strong> Every Saturday and Sunday, 12–3 PM</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <FaMapMarkerAlt className="mt-1 text-[#277DA1]" />
+            <p><strong>Location:</strong> Waterford Lakes PetSmart, Orlando, FL 32826</p>
+          </div>
+          <div className="mt-3 text-center text-sm">
+            Want to stay updated? Check out our social media pages and say hello!
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Email;
+export default EmailUs;

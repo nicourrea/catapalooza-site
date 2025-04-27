@@ -7,6 +7,7 @@ import catLogo from '../assets/CatLogo.png';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null); // Track open mobile dropdown
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -57,6 +58,10 @@ const Navbar = () => {
     },
   ];
 
+  const toggleDropdown = (label) => {
+    setOpenDropdown(openDropdown === label ? null : label);
+  };
+
   return (
     <nav className={`bg-white px-6 py-3 fixed w-full z-50 transition-shadow ${isScrolled ? 'shadow-md' : ''}`}>
       <div className="flex justify-between items-center">
@@ -79,10 +84,12 @@ const Navbar = () => {
                 }`}
               >
                 {item.label}
-                {item.dropdown && <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />}
+                {item.dropdown && (
+                  <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
+                )}
               </Link>
 
-              {/* Dropdown */}
+              {/* Desktop Dropdown */}
               {item.dropdown && (
                 <ul className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg py-2 w-48 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100">
                   {item.dropdown.map((dropItem) => (
@@ -104,7 +111,10 @@ const Navbar = () => {
         {/* Mobile Button */}
         <button
           className="md:hidden text-[#1D3557] focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => {
+            setMenuOpen(!menuOpen);
+            setOpenDropdown(null); // Close dropdown when reopening menu
+          }}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -116,19 +126,54 @@ const Navbar = () => {
       {menuOpen && (
         <ul className="md:hidden mt-4 space-y-3 text-[#1D3557] font-medium animate__animated animate__fadeInDown">
           {navItems.map((item) => (
-            <li key={item.label}>
-              <Link
-                to={item.path}
-                onClick={() => setMenuOpen(false)}
-                className={`block px-4 py-2 ${
-                  item.label === 'Adopt'
-                    ? 'bg-[#3C8DBC] text-white rounded-lg font-semibold hover:bg-[#1D3557] transition'
-                    : 'hover:text-[#3C8DBC]'
-                }`}
-              >
-                {item.label}
-              </Link>
-            </li>
+            <div key={item.label}>
+              <li>
+                {item.dropdown ? (
+                  <button
+                    onClick={() => toggleDropdown(item.label)}
+                    className="flex w-full items-center justify-between px-4 py-2 hover:text-[#3C8DBC] transition"
+                  >
+                    {item.label}
+                    <ChevronDown size={16} className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
+                  </button>
+                ) : (
+                  <Link
+                    to={item.path}
+                    onClick={() => setMenuOpen(false)}
+                    className={`block px-4 py-2 ${
+                      item.label === 'Adopt'
+                        ? 'bg-[#3C8DBC] text-white rounded-lg font-semibold hover:bg-[#1D3557] transition'
+                        : 'hover:text-[#3C8DBC]'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )}
+              </li>
+
+              {/* Mobile Dropdown Slide */}
+              {item.dropdown && (
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    openDropdown === item.label ? 'max-h-96' : 'max-h-0'
+                  }`}
+                >
+                  <ul className="pl-8 mt-1 space-y-1">
+                    {item.dropdown.map((dropItem) => (
+                      <li key={dropItem.path}>
+                        <Link
+                          to={dropItem.path}
+                          onClick={() => setMenuOpen(false)}
+                          className="block px-2 py-1 text-sm text-[#1D3557] hover:text-[#3C8DBC]"
+                        >
+                          {dropItem.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           ))}
         </ul>
       )}

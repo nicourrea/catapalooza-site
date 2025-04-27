@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import catLogo from '../assets/CatLogo.png';
 
@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const navigate = useNavigate(); // ADD THIS
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -58,8 +59,19 @@ const Navbar = () => {
     },
   ];
 
-  const toggleDropdown = (label) => {
-    setOpenDropdown((prev) => (prev === label ? null : label));
+  const handleMobileClick = (item) => {
+    if (!item.dropdown) {
+      closeMenu();
+      navigate(item.path);
+      return;
+    }
+
+    if (openDropdown === item.label) {
+      closeMenu();
+      navigate(item.path);
+    } else {
+      setOpenDropdown(item.label);
+    }
   };
 
   const closeMenu = () => {
@@ -130,7 +142,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Dark Blur Background - Only When Menu Open */}
+      {/* Dark Blur Background */}
       {menuOpen && (
         <div
           className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
@@ -146,7 +158,7 @@ const Navbar = () => {
               <li>
                 {item.dropdown ? (
                   <button
-                    onClick={() => toggleDropdown(item.label)}
+                    onClick={() => handleMobileClick(item)}
                     className="flex w-full items-center justify-between px-4 py-2 hover:text-[#3C8DBC] transition"
                   >
                     {item.label}
@@ -167,7 +179,7 @@ const Navbar = () => {
                 )}
               </li>
 
-              {/* Collapsible Dropdown */}
+              {/* Collapsible */}
               {item.dropdown && (
                 <div
                   className={`overflow-hidden transition-all duration-300 ${

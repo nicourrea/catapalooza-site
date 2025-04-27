@@ -13,7 +13,7 @@ const OurMission = () => {
       </p>
 
       <p className="mb-6 text-lg leading-relaxed">
-        Our mission extends beyond just finding homes. We believe in creating sustainable change by addressing the root causes of overpopulation. Through our <strong className="text-[#277DA1]">Trap-Neuter-Return (TNR)</strong> program, we focus on managing the feral cat population to ensure healthier lives for outdoor cats while reducing the spread of diseases and preventing further breeding.
+        Our mission extends beyond just finding homes. We believe in creating sustainable change by addressing the root causes of overpopulation. Through our <strong className="text-[#277DA1]">Trap-Neuter-Release (TNR)</strong> program, we focus on managing the feral cat population to ensure healthier lives for outdoor cats while reducing the spread of diseases and preventing further breeding.
       </p>
 
       <p className="mb-6 text-lg leading-relaxed">

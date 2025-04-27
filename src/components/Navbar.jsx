@@ -98,9 +98,9 @@ const Navbar = () => {
                     <button
                       type="button"
                       onClick={() => toggleDropdown(item.label)}
-                      className="focus:outline-none"
+                      className="p-2 ml-1 rounded-full hover:bg-[#e5f3fb] transition"
                     >
-                      <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
+                      <ChevronDown size={18} className={`transition-transform duration-300 ${openDropdown === item.label ? 'rotate-180' : ''}`} />
                     </button>
                   )}
                 </div>
@@ -124,22 +124,24 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* Mobile Button */}
+          {/* Mobile Hamburger */}
           <button
-            className="md:hidden text-[#1D3557] focus:outline-none"
+            className={`md:hidden text-[#1D3557] focus:outline-none transform transition-transform duration-300 ${
+              menuOpen ? 'rotate-90' : ''
+            }`}
             onClick={() => {
               setMenuOpen(!menuOpen);
               setOpenDropdown(null);
             }}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
       </nav>
 
-      {/* Dark Blur Background */}
+      {/* Dark Blurred Background */}
       {menuOpen && (
         <div
           className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
@@ -148,8 +150,12 @@ const Navbar = () => {
       )}
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <ul className="fixed top-16 left-0 w-full bg-white p-4 z-50 space-y-3 text-[#1D3557] font-medium animate__animated animate__fadeInDown">
+      <div
+        className={`fixed top-16 left-0 w-full bg-white p-4 z-50 text-[#1D3557] font-medium transform transition-all duration-300 ease-out ${
+          menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'
+        }`}
+      >
+        <ul className="space-y-3">
           {navItems.map((item) => (
             <div key={item.label}>
               <li className="flex items-center justify-between px-4 py-2">
@@ -171,14 +177,14 @@ const Navbar = () => {
                       e.stopPropagation();
                       toggleDropdown(item.label);
                     }}
-                    className="ml-2 text-[#1D3557] focus:outline-none"
+                    className="p-3 ml-2 rounded-full hover:bg-[#e5f3fb] transition"
                   >
-                    <ChevronDown size={16} className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
+                    <ChevronDown size={20} className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
                   </button>
                 )}
               </li>
 
-              {/* Collapsible Dropdown */}
+              {/* Mobile Dropdown */}
               {item.dropdown && (
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
@@ -203,7 +209,7 @@ const Navbar = () => {
             </div>
           ))}
         </ul>
-      )}
+      </div>
     </>
   );
 };

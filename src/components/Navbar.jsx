@@ -107,7 +107,7 @@ const Navbar = () => {
 
                 {/* Desktop Dropdown */}
                 {item.dropdown && (
-                  <ul className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg py-2 w-48 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100">
+                  <ul className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg py-2 w-52 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100">
                     {item.dropdown.map((dropItem) => (
                       <li key={dropItem.path}>
                         <Link
@@ -126,22 +126,26 @@ const Navbar = () => {
 
           {/* Mobile Hamburger */}
           <button
-            className={`md:hidden text-[#1D3557] focus:outline-none transform transition-transform duration-300 ${
-              menuOpen ? 'rotate-90' : ''
-            }`}
+            className="md:hidden relative w-8 h-8 focus:outline-none z-50"
             onClick={() => {
               setMenuOpen(!menuOpen);
               setOpenDropdown(null);
             }}
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            <div className="absolute top-1/2 left-1/2 w-6 h-0.5 bg-[#1D3557] rounded transition-all duration-300 origin-center transform -translate-x-1/2 -translate-y-2"
+              style={{ transform: menuOpen ? 'translate(-50%, -50%) rotate(45deg)' : 'translate(-50%, -8px)' }}
+            ></div>
+            <div className="absolute top-1/2 left-1/2 w-6 h-0.5 bg-[#1D3557] rounded transition-all duration-300 origin-center transform"
+              style={{ opacity: menuOpen ? 0 : 1, transform: 'translate(-50%, -50%)' }}
+            ></div>
+            <div className="absolute top-1/2 left-1/2 w-6 h-0.5 bg-[#1D3557] rounded transition-all duration-300 origin-center transform -translate-x-1/2 translate-y-2"
+              style={{ transform: menuOpen ? 'translate(-50%, -50%) rotate(-45deg)' : 'translate(-50%, 8px)' }}
+            ></div>
           </button>
         </div>
       </nav>
 
-      {/* Dark Blurred Background */}
+      {/* Dark Background */}
       {menuOpen && (
         <div
           className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
@@ -151,18 +155,18 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-16 left-0 w-full bg-white p-4 z-50 text-[#1D3557] font-medium transform transition-all duration-300 ease-out ${
+        className={`fixed top-16 left-0 w-full bg-white p-6 z-50 text-[#1D3557] font-medium transform transition-all duration-300 ease-out ${
           menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'
         }`}
       >
-        <ul className="space-y-3">
+        <ul className="space-y-5">
           {navItems.map((item) => (
             <div key={item.label}>
-              <li className="flex items-center justify-between px-4 py-2">
+              <li className="flex items-center justify-between px-4 py-3">
                 <Link
                   to={item.path}
                   onClick={closeMenu}
-                  className={`flex-1 ${
+                  className={`flex-1 text-lg ${
                     item.label === 'Adopt'
                       ? 'bg-[#3C8DBC] text-white rounded-lg font-semibold px-4 py-2 hover:bg-[#1D3557] transition'
                       : 'hover:text-[#3C8DBC]'
@@ -179,25 +183,25 @@ const Navbar = () => {
                     }}
                     className="p-3 ml-2 rounded-full hover:bg-[#e5f3fb] transition"
                   >
-                    <ChevronDown size={20} className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
+                    <ChevronDown size={22} className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
                   </button>
                 )}
               </li>
 
-              {/* Mobile Dropdown */}
+              {/* Collapsible Dropdown */}
               {item.dropdown && (
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
                     openDropdown === item.label ? 'max-h-96' : 'max-h-0'
                   }`}
                 >
-                  <ul className="pl-8 mt-1 space-y-1">
+                  <ul className="pl-10 mt-1 space-y-2">
                     {item.dropdown.map((dropItem) => (
                       <li key={dropItem.path}>
                         <Link
                           to={dropItem.path}
                           onClick={closeMenu}
-                          className="block px-2 py-1 text-sm text-[#1D3557] hover:text-[#3C8DBC]"
+                          className="block px-2 py-1 text-md text-[#1D3557] hover:text-[#3C8DBC]"
                         >
                           {dropItem.label}
                         </Link>

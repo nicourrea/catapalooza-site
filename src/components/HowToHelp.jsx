@@ -20,7 +20,7 @@ const HowToHelp = () => {
         {/* Donate (linked) */}
         <Link
           to="/help/donate"
-          className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition duration-300 transform hover:-translate-y-1 block"
+          className="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-2 hover:scale-105"
         >
           <FaHandHoldingHeart className="text-4xl text-[#277DA1] mb-4 mx-auto" />
           <h2 className="text-xl font-bold mb-2 text-[#277DA1]">Donate</h2>
@@ -29,7 +29,7 @@ const HowToHelp = () => {
         </Link>
 
         {/* Volunteer */}
-        <div className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <div className="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-2 hover:scale-105">
           <FaHandsHelping className="text-4xl text-[#277DA1] mb-4 mx-auto" />
           <h2 className="text-xl font-bold mb-2 text-[#277DA1]">Volunteer</h2>
           <p className="text-sm mb-2">Join our network of passionate cat lovers.</p>
@@ -39,7 +39,7 @@ const HowToHelp = () => {
         </div>
 
         {/* Foster */}
-        <div className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <div className="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-2 hover:scale-105">
           <FaHome className="text-4xl text-[#277DA1] mb-4 mx-auto" />
           <h2 className="text-xl font-bold mb-2 text-[#277DA1]">Foster</h2>
           <p className="text-sm mb-2">Give a cat a temporary home and lots of love.</p>
@@ -49,7 +49,7 @@ const HowToHelp = () => {
         </div>
 
         {/* Adopt */}
-        <div className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <div className="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-2 hover:scale-105">
           <FaCat className="text-4xl text-[#277DA1] mb-4 mx-auto" />
           <h2 className="text-xl font-bold mb-2 text-[#277DA1]">Adopt</h2>
           <p className="text-sm mb-2">Click below to view our cats and start your adoption journey.</p>
@@ -62,7 +62,7 @@ const HowToHelp = () => {
       <h2 className="text-2xl font-bold mt-20 mb-8 text-center text-[#1D3557]">Other Ways to Contribute</h2>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 text-center">
         {/* PayPal */}
-        <div className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <div className="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-2 hover:scale-105">
           <FaPaypal className="text-3xl text-[#277DA1] mb-3 mx-auto" />
           <h3 className="text-lg font-semibold mb-2 text-[#277DA1]">PayPal</h3>
           <a
@@ -76,7 +76,7 @@ const HowToHelp = () => {
         </div>
 
         {/* Venmo */}
-        <div className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <div className="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-2 hover:scale-105">
           <FaMoneyBillWave className="text-3xl text-[#277DA1] mb-3 mx-auto" />
           <h3 className="text-lg font-semibold mb-2 text-[#277DA1]">Venmo</h3>
           <a
@@ -90,7 +90,7 @@ const HowToHelp = () => {
         </div>
 
         {/* Chewy */}
-        <div className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <div className="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-2 hover:scale-105">
           <FaStoreAlt className="text-3xl text-[#277DA1] mb-3 mx-auto" />
           <h3 className="text-lg font-semibold mb-2 text-[#277DA1]">Chewy Wish List</h3>
           <a
@@ -104,7 +104,7 @@ const HowToHelp = () => {
         </div>
 
         {/* Amazon */}
-        <div className="bg-white shadow-md p-6 rounded-xl hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+        <div className="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-transform duration-300 transform hover:-translate-y-2 hover:scale-105">
           <FaAmazon className="text-3xl text-[#277DA1] mb-3 mx-auto" />
           <h3 className="text-lg font-semibold mb-2 text-[#277DA1]">Amazon Wish List</h3>
           <a

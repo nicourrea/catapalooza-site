@@ -1,7 +1,7 @@
-// src/Cats.jsx
 import React, { useEffect, useState } from 'react';
 import { db } from "../firebase";
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { motion } from 'framer-motion'; // Import framer-motion
 
 const Cats = () => {
   const [cats, setCats] = useState([]);
@@ -47,9 +47,20 @@ const Cats = () => {
       ) : cats.length === 0 ? (
         <p className="text-center">No cats available right now.</p>
       ) : (
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {cats.map(cat => (
-            <div key={cat.id} className="bg-white rounded-xl shadow p-4 text-center">
+        <motion.div
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          {cats.map((cat) => (
+            <motion.div
+              key={cat.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="bg-white rounded-xl shadow p-4 text-center cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-lg"
+            >
               <img
                 src={cat.imageUrl}
                 alt={cat.name}
@@ -73,9 +84,9 @@ const Cats = () => {
                   View on Wagtopia →
                 </a>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );

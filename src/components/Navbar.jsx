@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const navigate = useNavigate(); // ADD THIS
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -59,19 +59,8 @@ const Navbar = () => {
     },
   ];
 
-  const handleMobileClick = (item) => {
-    if (!item.dropdown) {
-      closeMenu();
-      navigate(item.path);
-      return;
-    }
-
-    if (openDropdown === item.label) {
-      closeMenu();
-      navigate(item.path);
-    } else {
-      setOpenDropdown(item.label);
-    }
+  const toggleDropdown = (label) => {
+    setOpenDropdown((prev) => (prev === label ? null : label));
   };
 
   const closeMenu = () => {
@@ -94,19 +83,27 @@ const Navbar = () => {
           <ul className="hidden md:flex gap-6 text-[#1D3557] font-medium items-center relative">
             {navItems.map((item) => (
               <li key={item.label} className="relative group">
-                <Link
-                  to={item.path}
-                  className={`flex items-center gap-1 relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#3C8DBC] after:transition-all after:duration-300 hover:after:w-full ${
-                    item.label === 'Adopt'
-                      ? 'bg-[#3C8DBC] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1D3557] transition after:hidden'
-                      : 'hover:text-[#3C8DBC]'
-                  }`}
-                >
-                  {item.label}
+                <div className="flex items-center gap-1">
+                  <Link
+                    to={item.path}
+                    className={`relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#3C8DBC] after:transition-all after:duration-300 hover:after:w-full ${
+                      item.label === 'Adopt'
+                        ? 'bg-[#3C8DBC] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1D3557] transition after:hidden'
+                        : 'hover:text-[#3C8DBC]'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
                   {item.dropdown && (
-                    <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
+                    <button
+                      type="button"
+                      onClick={() => toggleDropdown(item.label)}
+                      className="focus:outline-none"
+                    >
+                      <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
+                    </button>
                   )}
-                </Link>
+                </div>
 
                 {/* Desktop Dropdown */}
                 {item.dropdown && (
@@ -155,31 +152,33 @@ const Navbar = () => {
         <ul className="fixed top-16 left-0 w-full bg-white p-4 z-50 space-y-3 text-[#1D3557] font-medium animate__animated animate__fadeInDown">
           {navItems.map((item) => (
             <div key={item.label}>
-              <li>
-                {item.dropdown ? (
+              <li className="flex items-center justify-between px-4 py-2">
+                <Link
+                  to={item.path}
+                  onClick={closeMenu}
+                  className={`flex-1 ${
+                    item.label === 'Adopt'
+                      ? 'bg-[#3C8DBC] text-white rounded-lg font-semibold px-4 py-2 hover:bg-[#1D3557] transition'
+                      : 'hover:text-[#3C8DBC]'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+                {item.dropdown && (
                   <button
-                    onClick={() => handleMobileClick(item)}
-                    className="flex w-full items-center justify-between px-4 py-2 hover:text-[#3C8DBC] transition"
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleDropdown(item.label);
+                    }}
+                    className="ml-2 text-[#1D3557] focus:outline-none"
                   >
-                    {item.label}
                     <ChevronDown size={16} className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
                   </button>
-                ) : (
-                  <Link
-                    to={item.path}
-                    onClick={closeMenu}
-                    className={`block px-4 py-2 ${
-                      item.label === 'Adopt'
-                        ? 'bg-[#3C8DBC] text-white rounded-lg font-semibold hover:bg-[#1D3557] transition'
-                        : 'hover:text-[#3C8DBC]'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
                 )}
               </li>
 
-              {/* Collapsible */}
+              {/* Collapsible Dropdown */}
               {item.dropdown && (
                 <div
                   className={`overflow-hidden transition-all duration-300 ${

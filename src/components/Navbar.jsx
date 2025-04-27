@@ -83,27 +83,22 @@ const Navbar = () => {
           <ul className="hidden md:flex gap-6 text-[#1D3557] font-medium items-center relative">
             {navItems.map((item) => (
               <li key={item.label} className="relative group">
-                <div className="flex items-center gap-1">
-                  <Link
-                    to={item.path}
-                    className={`relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#3C8DBC] after:transition-all after:duration-300 hover:after:w-full ${
-                      item.label === 'Adopt'
-                        ? 'bg-[#3C8DBC] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1D3557] transition after:hidden'
-                        : 'hover:text-[#3C8DBC]'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
+                <Link
+                  to={item.path}
+                  className={`flex items-center gap-1 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#3C8DBC] after:transition-all after:duration-300 hover:after:w-full ${
+                    item.label === 'Adopt'
+                      ? 'bg-[#3C8DBC] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1D3557] transition after:hidden'
+                      : 'hover:text-[#3C8DBC]'
+                  }`}
+                >
+                  {item.label}
                   {item.dropdown && (
-                    <button
-                      type="button"
-                      onClick={() => toggleDropdown(item.label)}
-                      className="p-2 ml-1 rounded-full hover:bg-[#e5f3fb] transition"
-                    >
-                      <ChevronDown size={18} className={`transition-transform duration-300 ${openDropdown === item.label ? 'rotate-180' : ''}`} />
-                    </button>
+                    <ChevronDown
+                      size={16}
+                      className="transition-transform duration-300 group-hover:rotate-180 hidden md:inline"
+                    />
                   )}
-                </div>
+                </Link>
 
                 {/* Desktop Dropdown */}
                 {item.dropdown && (
@@ -181,14 +176,14 @@ const Navbar = () => {
                       e.stopPropagation();
                       toggleDropdown(item.label);
                     }}
-                    className="p-3 ml-2 rounded-full hover:bg-[#e5f3fb] transition"
+                    className="p-3 ml-2 rounded-full hover:bg-[#e5f3fb] transition md:hidden" // 👈 Hidden on desktop
                   >
                     <ChevronDown size={22} className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
                   </button>
                 )}
               </li>
 
-              {/* Collapsible Dropdown */}
+              {/* Mobile Dropdown */}
               {item.dropdown && (
                 <div
                   className={`overflow-hidden transition-all duration-300 ${

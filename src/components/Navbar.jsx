@@ -71,10 +71,10 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className={`bg-white px-6 py-3 fixed w-full z-50 transition-shadow ${isScrolled ? 'shadow-md' : ''}`}>
+      <nav className={`bg-white px-6 py-3 fixed w-full z-50 transition-shadow duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 text-[1.6rem] font-bold text-[#3C8DBC] hover:scale-105 transition-transform duration-300">
+          <Link to="/" className="flex items-center gap-2 text-[1.6rem] font-bold text-[#3C8DBC] hover:scale-105 transition-transform duration-300 ease-in-out">
             Catapalooza
             <img src={catLogo} alt="Catapalooza Logo" className="h-8 w-8 object-contain" />
           </Link>
@@ -85,29 +85,33 @@ const Navbar = () => {
               <li key={item.label} className="relative group">
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-1 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#3C8DBC] after:transition-all after:duration-300 hover:after:w-full ${
+                  className={`flex items-center gap-1 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-[#3C8DBC] after:transition-all after:duration-300 ease-in-out hover:after:w-full ${
                     item.label === 'Adopt'
                       ? 'bg-[#3C8DBC] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1D3557] transition after:hidden'
                       : 'hover:text-[#3C8DBC]'
-                  }`}
+                  } transition-colors duration-300 ease-in-out`}
                 >
                   {item.label}
                   {item.dropdown && (
                     <ChevronDown
                       size={16}
-                      className="transition-transform duration-300 group-hover:rotate-180 hidden md:inline"
+                      className="transition-transform duration-300 group-hover:rotate-180 hidden md:inline ease-in-out"
                     />
                   )}
                 </Link>
 
                 {/* Desktop Dropdown */}
                 {item.dropdown && (
-                  <ul className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg py-2 w-52 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100">
-                    {item.dropdown.map((dropItem) => (
-                      <li key={dropItem.path}>
+                  <ul className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg py-2 w-52 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform scale-95 group-hover:scale-100">
+                    {item.dropdown.map((dropItem, index) => (
+                      <li
+                        key={dropItem.path}
+                        className="transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2"
+                        style={{ transitionDelay: `${index * 100}ms` }}
+                      >
                         <Link
                           to={dropItem.path}
-                          className="block px-4 py-2 text-sm text-[#1D3557] hover:bg-[#e5f3fb] transition-colors duration-200"
+                          className="block px-4 py-3 text-sm text-[#1D3557] hover:bg-[#e5f3fb] transition-all duration-300 ease-in-out"
                         >
                           {dropItem.label}
                         </Link>
@@ -150,7 +154,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-16 left-0 w-full bg-white p-6 z-50 text-[#1D3557] font-medium transform transition-all duration-300 ease-out ${
+        className={`fixed top-16 left-0 w-full bg-white p-6 z-50 text-[#1D3557] font-medium transform transition-all duration-300 ease-in-out ${
           menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'
         }`}
       >
@@ -165,7 +169,7 @@ const Navbar = () => {
                     item.label === 'Adopt'
                       ? 'bg-[#3C8DBC] text-white rounded-lg font-semibold px-4 py-2 hover:bg-[#1D3557] transition'
                       : 'hover:text-[#3C8DBC]'
-                  }`}
+                  } transition-all duration-300 ease-in-out`}
                 >
                   {item.label}
                 </Link>
@@ -176,9 +180,9 @@ const Navbar = () => {
                       e.stopPropagation();
                       toggleDropdown(item.label);
                     }}
-                    className="p-3 ml-2 rounded-full hover:bg-[#e5f3fb] transition md:hidden" // 👈 Hidden on desktop
+                    className="p-3 ml-2 rounded-full hover:bg-[#e5f3fb] transition"
                   >
-                    <ChevronDown size={22} className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />
+                    <ChevronDown size={22} className={`transition-transform duration-300 ${openDropdown === item.label ? 'rotate-180' : ''}`} />
                   </button>
                 )}
               </li>
@@ -191,8 +195,18 @@ const Navbar = () => {
                   }`}
                 >
                   <ul className="pl-10 mt-1 space-y-2">
-                    {item.dropdown.map((dropItem) => (
-                      <li key={dropItem.path}>
+                    {item.dropdown.map((dropItem, index) => (
+                      <li
+                        key={dropItem.path}
+                        className="transition-all duration-300 ease-in-out opacity-0 translate-y-2"
+                        style={{
+                          transitionDelay: `${index * 100}ms`,
+                          ...(openDropdown === item.label && {
+                            opacity: 1,
+                            transform: 'translateY(0)'
+                          }),
+                        }}
+                      >
                         <Link
                           to={dropItem.path}
                           onClick={closeMenu}

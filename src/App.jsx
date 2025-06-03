@@ -21,34 +21,38 @@ import TeamUpWithUs from './components/TeamUpWithUs';
 import PastHighlights from './components/PastHighlights';
 import OurMission from './components/OurMission';
 import AreasWeServe from './components/AreasWeServe';
-import WhoWeAre from './components/WhoWeAre'; //  New WhoWeAre import
+import WhoWeAre from './components/WhoWeAre';
 
 export default function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/about/Who" element={<WhoWeAre />} /> 
-        <Route path="/about/mission" element={<OurMission />} />
-        <Route path="/about/areas" element={<AreasWeServe />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/events/calendar" element={<EventsCalendar />} />
-        <Route path="/events/team-up" element={<TeamUpWithUs />} />
-        <Route path="/events/highlights" element={<PastHighlights />} />
-        <Route path="/help" element={<HowToHelp />} />
-        <Route path="/help/donate" element={<Donate />} />
-        <Route path="/help/foster" element={<Foster />} />
-        <Route path="/help/volunteer" element={<Volunteer />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/contact/faqs" element={<FAQs />} />
-        <Route path="/contact/social" element={<SocialMedia />} />
-        <Route path="/contact/email" element={<EmailUs />} />
-        <Route path="/cats" element={<Cats />} />
-        <Route path="/upload" element={<Upload />} />
-      </Routes>
-      <Footer />
+      <div style={{ margin: 0, padding: 0, overflowX: 'hidden' }}>
+        <Navbar />
+        <main style={{ overflowX: 'hidden' }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/about/Who" element={<WhoWeAre />} />
+            <Route path="/about/mission" element={<OurMission />} />
+            <Route path="/about/areas" element={<AreasWeServe />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/events/calendar" element={<EventsCalendar />} />
+            <Route path="/events/team-up" element={<TeamUpWithUs />} />
+            <Route path="/events/highlights" element={<PastHighlights />} />
+            <Route path="/help" element={<HowToHelp />} />
+            <Route path="/help/donate" element={<Donate />} />
+            <Route path="/help/foster" element={<Foster />} />
+            <Route path="/help/volunteer" element={<Volunteer />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact/faqs" element={<FAQs />} />
+            <Route path="/contact/social" element={<SocialMedia />} />
+            <Route path="/contact/email" element={<EmailUs />} />
+            <Route path="/cats" element={<Cats />} />
+            <Route path="/upload" element={<Upload />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }

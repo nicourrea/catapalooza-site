@@ -1,40 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from "./firebase";
 import UploadCat from './UploadCat';
 import UploadEventForm from './UploadEventForm';
+import { useNavigate } from 'react-router-dom';
+
 
 const Upload = () => {
-  const [authorized, setAuthorized] = useState(false);
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState(null);
   const [view, setView] = useState('cat');
-  const [status, setStatus] = useState('');
+  const navigate = useNavigate();
 
-  const handlePasswordSubmit = (e) => {
-    e.preventDefault();
-    if (password === 'admin123') {
-      setAuthorized(true);
-      setStatus('');
-    } else {
-      setStatus('Incorrect password');
-    }
-  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+        navigate('/login'); // 👈 redirect to login if not authenticated
+      }
+    });
 
-  if (!authorized) {
+    return () => unsubscribe();
+  }, [navigate]);
+
+  if (!user) {
     return (
-      <div className="max-w-sm mx-auto py-32 text-center text-gray-800">
-        <h2 className="text-2xl font-bold mb-4 text-[#277DA1]">Admin Login</h2>
-        <form onSubmit={handlePasswordSubmit} className="space-y-4">
-          <input
-            type="password"
-            placeholder="Enter admin password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-gray-300 px-4 py-2 rounded"
-          />
-          <button type="submit" className="bg-[#277DA1] text-white px-6 py-2 rounded hover:bg-[#1D3557]">
-            Enter
-          </button>
-        </form>
-        {status && <p className="mt-4 text-sm text-red-600">{status}</p>}
+      <div className="pt-32 text-center text-gray-800">
+        <p className="text-xl">Redirecting to login...</p>
       </div>
     );
   }

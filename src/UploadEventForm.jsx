@@ -10,6 +10,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { db } from "./firebase";
 
 const UploadEventForm = () => {
@@ -33,6 +34,14 @@ const UploadEventForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+      setStatus("❌ You must be signed in to upload events.");
+      return;
+    }
+
     if (!title || !description || !location || !time || !date) {
       setStatus("Please fill out all fields.");
       return;
@@ -45,16 +54,13 @@ const UploadEventForm = () => {
       const isPM = startTime.toLowerCase().includes("pm");
       const hour24 = (parseInt(hour) % 12) + (isPM ? 12 : 0);
 
-      const eventDate = new Date(date);
-      eventDate.setHours(hour24);
-      eventDate.setMinutes(parseInt(minute));
-      eventDate.setSeconds(0);
+      // Ensure local time is used instead of UTC
+      const localDate = new Date(date + "T00:00");
+      localDate.setHours(hour24);
+      localDate.setMinutes(parseInt(minute));
+      localDate.setSeconds(0);
 
-      if (isNaN(eventDate.getTime())) {
-        throw new Error("Invalid date");
-      }
-
-      const dateTimestamp = Timestamp.fromDate(eventDate);
+      const dateTimestamp = Timestamp.fromDate(localDate);
 
       if (editingId) {
         await updateDoc(doc(db, "Events", editingId), {
@@ -184,7 +190,9 @@ const UploadEventForm = () => {
                 </p>
                 <p className="text-sm mb-2 text-gray-700">{event.description}</p>
                 <p className="text-xs text-gray-500">
-                  {new Date(event.date.seconds * 1000).toLocaleDateString()}
+                  {new Date(event.date.seconds * 1000).toLocaleDateString("en-US", {
+                    timeZone: "America/New_York",
+                  })}
                 </p>
                 <div className="flex justify-center gap-2 mt-3">
                   <button

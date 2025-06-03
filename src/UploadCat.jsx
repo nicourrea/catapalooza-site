@@ -221,4 +221,4 @@ const UploadCat = () => {
   );
 };
 
-export default UploadCat;
+export default UploadCat

@@ -22,7 +22,8 @@ import PastHighlights from './components/PastHighlights';
 import OurMission from './components/OurMission';
 import AreasWeServe from './components/AreasWeServe';
 import WhoWeAre from './components/WhoWeAre';
-
+import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 export default function App() {
   return (
     <Router>
@@ -48,7 +49,18 @@ export default function App() {
             <Route path="/contact/social" element={<SocialMedia />} />
             <Route path="/contact/email" element={<EmailUs />} />
             <Route path="/cats" element={<Cats />} />
-            <Route path="/upload" element={<Upload />} />
+
+            {/* 🔐 Upload page is now protected */}
+            <Route
+              path="/upload"
+              element={
+                <ProtectedRoute>
+                  <Upload />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
         <Footer />

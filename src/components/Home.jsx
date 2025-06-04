@@ -10,6 +10,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import CatLogo from '../assets/CCAT.png';
+import Trap from '../assets/Trap.png';
+import Neuter from '../assets/Nueter.png';
+import Release from '../assets/Release.png';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
@@ -156,7 +159,7 @@ const Home = () => {
       <div className="text-gray-800">
 {/* About Section */}
 <motion.section
-  className="py-24 px-6 bg-[#E5F3FB]"
+  className="py-24 px-6 bg-[#e4f2f9]"
   initial="hidden"
   whileInView="visible"
   viewport={{ once: true }}
@@ -198,36 +201,52 @@ const Home = () => {
 
 
 
-        {/* Events Section */}
-        <motion.section
-          className="py-8 px-6 text-center bg-[#f5f5f5]"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-        >
-          <h2 className="events-heading text-4xl font-bold mb-6 text-[#1D3557]">Upcoming Events</h2>
-          {upcomingEvents.length > 0 ? (
-            <div className="max-w-3xl mx-auto bg-white shadow-md rounded-2xl p-6 text-left">
-              <div className="text-[#3C8DBC] text-sm font-semibold mb-2">
-                {new Date(upcomingEvents[0].date.seconds * 1000).toLocaleDateString('en-US', {
-                  weekday: 'short',
-                  month: 'short',
-                  day: '2-digit',
-                  year: 'numeric'
-                })}
-              </div>
-              <h4 className="text-xl font-bold mb-2 text-[#1D3557]">{upcomingEvents[0].title}</h4>
-              <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
-                <FaMapMarkerAlt className="text-[#F4A261]" />
-                <span>{upcomingEvents[0].location}</span>
-              </div>
-              <p className="text-gray-700">{upcomingEvents[0].description}</p>
-            </div>
-          ) : (
-            <p className="text-gray-600">No events this week! Check back soon.</p>
-          )}
-        </motion.section>
+<motion.section
+  className="py-20 px-6 text-center bg-[#B6D9EF]"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={fadeUp}
+>
+  <h2 className="text-4xl font-bold mb-12 text-[#1D3557]">The Purrfect Rescue Routine</h2>
+
+  <div className="max-w-6xl mx-auto grid gap-16 grid-cols-1 md:grid-cols-3">
+    
+    {/* Trap */}
+    <div className="flex flex-col items-center text-[#1D3557]">
+      <div className="w-52 h-52 rounded-full overflow-hidden shadow-xl hover:scale-105 transition duration-300">
+        <img src={Trap} alt="Trap" className="object-cover w-full h-full" />
+      </div>
+      <h3 className="text-2xl font-bold mt-6 mb-2">Trap</h3>
+      <p className="text-base max-w-sm">
+        We humanely trap community cats using safe equipment and experienced volunteers.
+      </p>
+    </div>
+
+    {/* Neuter */}
+    <div className="flex flex-col items-center text-[#1D3557]">
+      <div className="w-52 h-52 rounded-full overflow-hidden shadow-xl hover:scale-105 transition duration-300">
+        <img src={Neuter} alt="Neuter" className="object-cover w-full h-full" />
+      </div>
+      <h3 className="text-2xl font-bold mt-6 mb-2">Neuter</h3>
+      <p className="text-base max-w-sm">
+        Cats are spayed or neutered, vaccinated, and treated before returning home.
+      </p>
+    </div>
+
+    {/* Release */}
+    <div className="flex flex-col items-center text-[#1D3557]">
+      <div className="w-52 h-52 rounded-full overflow-hidden shadow-xl hover:scale-105 transition duration-300">
+        <img src={Release} alt="Release" className="object-cover w-full h-full" />
+      </div>
+      <h3 className="text-2xl font-bold mt-6 mb-2">Return</h3>
+      <p className="text-base max-w-sm">
+        Once healed, cats are returned to their community—happy, fixed, and no longer reproducing.
+      </p>
+    </div>
+
+  </div>
+</motion.section>
 
 
 

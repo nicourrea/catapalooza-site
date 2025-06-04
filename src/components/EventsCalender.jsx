@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs, query, orderBy, where, Timestamp } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaChevronDown } from 'react-icons/fa';
 
 const EventsCalendar = () => {
   const [eventsByMonth, setEventsByMonth] = useState({});
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [platform, setPlatform] = useState('other');
+  const [expandedMonths, setExpandedMonths] = useState({});
 
   useEffect(() => {
     const ua = navigator.userAgent || navigator.vendor || window.opera;
@@ -22,27 +24,35 @@ const EventsCalendar = () => {
     const fetchEvents = async () => {
       try {
         const now = new Date();
-        const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-        const startOfMonthAfterNext = new Date(now.getFullYear(), now.getMonth() + 3, 1);
+        const startOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        const sixMonthsLater = new Date(now.getFullYear(), now.getMonth() + 6, 1);
 
         const q = query(
           collection(db, 'Events'),
-          where('date', '>=', Timestamp.fromDate(startOfThisMonth)),
-          where('date', '<', Timestamp.fromDate(startOfMonthAfterNext)),
+          where('date', '>=', Timestamp.fromDate(startOfCurrentMonth)),
+          where('date', '<', Timestamp.fromDate(sixMonthsLater)),
           orderBy('date')
         );
 
         const snapshot = await getDocs(q);
         const grouped = {};
+        const currentMonthStr = now.toLocaleString('default', {
+          month: 'long',
+          year: 'numeric',
+        });
 
         snapshot.docs.forEach((doc) => {
           const data = doc.data();
-          const eventMonth = new Date(data.date.seconds * 1000).toLocaleString('default', { month: 'long', year: 'numeric' });
+          const eventMonth = new Date(data.date.seconds * 1000).toLocaleString('default', {
+            month: 'long',
+            year: 'numeric',
+          });
           if (!grouped[eventMonth]) grouped[eventMonth] = [];
           grouped[eventMonth].push({ id: doc.id, ...data });
         });
 
         setEventsByMonth(grouped);
+        setExpandedMonths({ [currentMonthStr]: true });
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -70,6 +80,10 @@ const EventsCalendar = () => {
     return { googleLink, icsUrl };
   };
 
+  const toggleMonth = (month) => {
+    setExpandedMonths((prev) => ({ ...prev, [month]: !prev[month] }));
+  };
+
   return (
     <div className="min-h-screen px-6 pt-28 pb-24 bg-white text-[#1D3557]">
       <motion.h1 
@@ -82,7 +96,7 @@ const EventsCalendar = () => {
       </motion.h1>
 
       {Object.keys(eventsByMonth).length === 0 ? (
-        <p className="text-center text-lg">No events this month or next.</p>
+        <p className="text-center text-lg">No events this month or upcoming.</p>
       ) : (
         Object.entries(eventsByMonth).map(([month, events]) => (
           <div key={month} className="mb-12 max-w-3xl mx-auto">
@@ -91,32 +105,36 @@ const EventsCalendar = () => {
               whileInView={{ opacity: 1, x: 0 }} 
               viewport={{ once: true }} 
               transition={{ duration: 0.4 }}
-              className="text-2xl font-semibold mb-4"
+              onClick={() => toggleMonth(month)}
+              className="text-2xl font-semibold mb-4 cursor-pointer flex items-center justify-between"
             >
               {month}
+              <FaChevronDown className={`transform transition-transform duration-300 ${expandedMonths[month] ? 'rotate-180' : ''}`} />
             </motion.h2>
             <div className="space-y-6">
-              {events.map((event) => (
-                <motion.div
-                  key={event.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                  onClick={() => {
-                    setSelectedEvent(event);
-                    setShowModal(true);
-                  }}
-                  className="cursor-pointer p-6 bg-[#f9fbfc] rounded-xl shadow hover:shadow-md transition"
-                >
-                  <h3 className="text-xl font-semibold mb-1">{event.title}</h3>
-                  <p className="text-sm text-gray-600 mb-1">
-                    {new Date(event.date.seconds * 1000).toLocaleDateString()} — {event.time}
-                  </p>
-                  <p className="text-base mb-1">📍 {event.location}</p>
-                  <p>{event.description}</p>
-                </motion.div>
-              ))}
+              <AnimatePresence>
+                {expandedMonths[month] && events.map((event) => (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.4 }}
+                    onClick={() => {
+                      setSelectedEvent(event);
+                      setShowModal(true);
+                    }}
+                    className="cursor-pointer p-6 bg-[#f9fbfc] rounded-xl shadow hover:shadow-md transition"
+                  >
+                    <h3 className="text-xl font-semibold mb-1">{event.title}</h3>
+                    <p className="text-sm text-gray-600 mb-1">
+                      {new Date(event.date.seconds * 1000).toLocaleDateString()} — {event.time}
+                    </p>
+                    <p className="text-base mb-1">📍 {event.location}</p>
+                    <p>{event.description}</p>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </div>
         ))

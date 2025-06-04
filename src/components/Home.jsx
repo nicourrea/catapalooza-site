@@ -112,7 +112,7 @@ const Home = () => {
 
   return (
     <>
-    {/* Hero Section */} 
+{/* Hero Section */} 
 <motion.section
   className="relative w-screen h-[85vh] bg-cover bg-[center_95%] bg-no-repeat flex items-center justify-center text-center px-4 text-white"
   style={{ backgroundImage: `url(${TNRBackground})` }}
@@ -124,35 +124,28 @@ const Home = () => {
   {/* Overlay */}
   <div className="absolute inset-0 bg-black/25 z-0" />
 
-{/* Text content */}
-<div className="relative z-10 text-center px-4 mt-[60vh] pro:mt-[50vh] promax:mt-[46vh] md:mt-24 lg:mt-32 xl:mt-40">
-  <h1 className="text-[2rem] pro:text-[2.3rem] promax:text-[2.5rem] md:text-7xl font-bold mb-4 drop-shadow-lg leading-snug md:leading-tight max-w-[90%] md:max-w-none mx-auto">
-  Changing Lives,<br className="block md:hidden" /> One Cat at a Time.
-</h1>
-  <p className="text-base pro:text-lg promax:text-xl md:text-2xl max-w-xs pro:max-w-sm promax:max-w-md md:max-w-2xl mx-auto drop-shadow-md">
-    Join Catapalooza in giving every stray cat and kitten a second chance.
-  </p>
-</div>
+  {/* Text content */}
+  <div className="relative z-10 text-center px-4 mt-[60vh] pro:mt-[50vh] promax:mt-[46vh] md:mt-16 lg:mt-32 xl:mt-40">
+    <h1 className="text-[2rem] pro:text-[2.3rem] promax:text-[2.5rem] md:text-7xl font-bold mb-4 drop-shadow-lg leading-snug md:leading-tight max-w-[90%] md:max-w-none mx-auto">
+      Changing Lives,<br className="block md:hidden" /> One Cat at a Time.
+    </h1>
+    <p className="text-base pro:text-lg promax:text-xl md:text-2xl max-w-xs pro:max-w-sm promax:max-w-md md:max-w-2xl mx-auto drop-shadow-md">
+      Join Catapalooza in giving every stray cat and kitten a second chance.
+    </p>
+  </div>
 
   {/* SVG wave transition */}
-  <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg">
+  <svg className="absolute bottom-0 left-0 w-full block" viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path fill="#B6D9EF" d="M0,0 C720,100 720,100 1440,0 L1440,100 L0,100 Z" />
   </svg>
 </motion.section>
 
-{/* Blue Section Above About */}
-<motion.section
-  className="relative bg-[#B6D9EF] text-[#1D3557] pt-1 pb-[70px] px-4 text-center"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  variants={fadeUp}
->
+{/* Blue Section (No Animation) */}
+<section className="relative bg-[#B6D9EF] text-[#1D3557] -mt-px pt-1 pb-[70px] px-4 text-center">
   <h2 className="text-3xl md:text-4xl font-bold mb-2 -mt-1">
     Together, We Can Make a Difference.
   </h2>
-  <p className="text-base md:text-lg max-w-2xl mx-auto mb-4 -mt-1">
-  </p>
+  <p className="text-base md:text-lg max-w-2xl mx-auto mb-4 -mt-1"></p>
   <div className="flex justify-center gap-3 flex-wrap">
     <Link to="/help/donate">
       <button className="bg-[#1D3557] text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-[#16324F] transition">
@@ -165,7 +158,7 @@ const Home = () => {
       </button>
     </Link>
   </div>
-</motion.section>
+</section>
 
 
 

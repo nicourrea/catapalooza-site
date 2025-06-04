@@ -112,13 +112,13 @@ const Home = () => {
 
   return (
     <>
-   {/* Hero Section (with motion) */}
+ {/* Hero Section (with motion) */}
 <motion.section
   className="relative w-screen h-[85vh] bg-cover bg-[center_95%] bg-no-repeat flex items-center justify-center text-center px-4 text-white"
   style={{ backgroundImage: `url(${TNRBackground})` }}
   initial="hidden"
   whileInView="visible"
-  viewport={{ once: true }}
+  viewport={{ once: false, amount: 0.2 }}
   variants={fadeUp}
 >
   {/* Overlay */}
@@ -129,7 +129,7 @@ const Home = () => {
     className="relative z-10 text-center px-4 mt-[60vh] pro:mt-[50vh] promax:mt-[46vh] md:mt-16 lg:mt-32 xl:mt-40"
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true }}
+    viewport={{ once: false, amount: 0.2 }}
     variants={fadeUp}
   >
     <h1 className="text-[2rem] pro:text-[2.3rem] promax:text-[2.5rem] md:text-7xl font-bold mb-4 drop-shadow-lg leading-snug md:leading-tight max-w-[90%] md:max-w-none mx-auto">
@@ -141,24 +141,29 @@ const Home = () => {
   </motion.div>
 
   {/* SVG wave (no animation) */}
-  <svg className="absolute bottom-0 left-0 w-full block" viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <svg
+    className="absolute bottom-0 left-0 w-full block"
+    viewBox="0 0 1440 100"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+  >
     <path fill="#B6D9EF" d="M0,0 C720,100 720,100 1440,0 L1440,100 L0,100 Z" />
   </svg>
 </motion.section>
 
-{/* Blue Section (static wrapper, animated content) */}
+{/* Blue Section (static wrapper, animated content only) */}
 <section className="relative bg-[#B6D9EF] text-[#1D3557] -mt-px pt-4 pb-[50px] px-4 text-center">
   <motion.div
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true }}
+    viewport={{ once: false, amount: 0.2 }}
     variants={fadeUp}
   >
     <h2 className="text-3xl md:text-4xl font-bold mb-2 -mt-1">
       Together, We Can Make a Difference.
     </h2>
     <p className="text-base md:text-lg max-w-2xl mx-auto mb-4 -mt-1"></p>
-    <div className="flex justify-center gap-3 flex-wrap">
+    <div className="flex justify-center gap-3 flex-wrap mt-4">
       <Link to="/help/donate">
         <button className="bg-[#1D3557] text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-[#16324F] transition">
           Donate

@@ -11,10 +11,11 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-[#277DA1] text-white py-6 mt-12">
-      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center md:items-start text-center md:text-left gap-6">
+        
         {/* Left Section */}
-        <div className="mb-4 md:mb-0">
-          <h4 className="text-xl font-semibold flex items-center gap-2">
+        <div>
+          <h4 className="text-xl font-semibold flex items-center justify-center md:justify-start gap-2">
             <FaPaw className="inline-block" />
             Catapalooza, Inc.
           </h4>
@@ -26,13 +27,13 @@ const Footer = () => {
         </div>
 
         {/* Right Section */}
-        <div className="flex space-x-6 text-xl items-end relative">
+        <div className="flex space-x-6 text-xl items-end relative justify-center md:justify-end">
           <a
             href="https://www.instagram.com/catapaloozatnr"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="hover:text-gray-200"
+            className="hover:text-[#E5F3FB] transition"
           >
             <FaInstagram />
           </a>
@@ -41,7 +42,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="hover:text-gray-200"
+            className="hover:text-[#E5F3FB] transition"
           >
             <FaFacebook />
           </a>
@@ -50,12 +51,12 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="TikTok"
-            className="hover:text-gray-200"
+            className="hover:text-[#E5F3FB] transition"
           >
             <FaTiktok />
           </a>
 
-          {/* Lock Icon with Admin Text */}
+          {/* Lock Icon with Tooltip */}
           <div className="relative group">
             <a
               href="/login"
@@ -64,7 +65,7 @@ const Footer = () => {
             >
               <FaLock className="transition duration-300 group-hover:drop-shadow-[0_0_6px_white]" />
             </a>
-            <span className="absolute left-1/2 -translate-x-1/2 mt-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-white text-[#1D3557] px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               Admin
             </span>
           </div>

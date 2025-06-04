@@ -125,10 +125,10 @@ const Home = () => {
   <div className="absolute inset-0 bg-black/25 z-0" />
 
 {/* Text content */}
-<div className="relative z-10 text-center px-4 mt-[60vh] pro:mt-[50vh] promax:mt-[46vh] md:mt-24">
-  <h1 className="text-[2rem] pro:text-[2.3rem] promax:text-[2.5rem] md:text-7xl font-bold mb-4 drop-shadow-lg leading-snug md:leading-tight max-w-[90%] mx-auto">
-    Changing Lives,<br className="block md:hidden" /> One Cat at a Time.
-  </h1>
+<div className="relative z-10 text-center px-4 mt-[60vh] pro:mt-[50vh] promax:mt-[46vh] md:mt-24 lg:mt-32 xl:mt-40">
+  <h1 className="text-[2rem] pro:text-[2.3rem] promax:text-[2.5rem] md:text-7xl font-bold mb-4 drop-shadow-lg leading-snug md:leading-tight max-w-[90%] md:max-w-none mx-auto">
+  Changing Lives,<br className="block md:hidden" /> One Cat at a Time.
+</h1>
   <p className="text-base pro:text-lg promax:text-xl md:text-2xl max-w-xs pro:max-w-sm promax:max-w-md md:max-w-2xl mx-auto drop-shadow-md">
     Join Catapalooza in giving every stray cat and kitten a second chance.
   </p>

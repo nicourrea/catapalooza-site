@@ -124,12 +124,13 @@ const Home = () => {
   {/* Overlay */}
   <div className="absolute inset-0 bg-black/25 z-0" />
 
- {/* Text content */}
-<div className="relative z-10 text-center px-4 mt-[52vh] md:mt-24">  <h1 className="text-[2.7rem] md:text-7xl font-bold mb-4 drop-shadow-lg">
-    Changing Lives, One Cat at a Time.
+{/* Text content */}
+<div className="relative z-10 text-center px-4 mt-[52vh] md:mt-24">
+  <h1 className="text-[2.7rem] sm:text-[2.9rem] md:text-7xl font-bold mb-4 drop-shadow-lg leading-tight">
+    Changing Lives,<br className="block md:hidden" /> One Cat at a Time.
   </h1>
-  <p className="text-lg md:text-2xl max-w-md md:max-w-2xl mx-auto drop-shadow-md">
-        Join Catapalooza in giving every stray cat and kitten a second chance.
+  <p className="text-lg sm:text-xl md:text-2xl max-w-sm sm:max-w-md md:max-w-2xl mx-auto drop-shadow-md">
+    Join Catapalooza in giving every stray cat and kitten a second chance.
   </p>
 </div>
 

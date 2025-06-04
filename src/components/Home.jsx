@@ -19,9 +19,24 @@ import 'swiper/css/free-mode';
 import 'swiper/css/mousewheel';
 import TNRBackground from '../assets/lala3.jpeg';
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
+const fadeStagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const fadeItem = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };
@@ -98,7 +113,7 @@ const Home = () => {
   return (
     <>
     {/* Hero Section */} 
-     <motion.section
+<motion.section
   className="relative w-screen h-[85vh] bg-cover bg-[center_95%] bg-no-repeat flex items-center justify-center text-center px-4 text-white"
   style={{ backgroundImage: `url(${TNRBackground})` }}
   initial="hidden"
@@ -109,20 +124,19 @@ const Home = () => {
   {/* Overlay */}
   <div className="absolute inset-0 bg-black/25 z-0" />
 
-  {/* Text content */}
-  <div className="relative z-10 mt-24 text-center px-4">
-    <h1 className="text-6xl md:text-7xl font-bold mb-4 drop-shadow-lg">
-      Changing Lives, One Cat at a Time.
-    </h1>
-    <p className="text-xl md:text-2xl max-w-2xl mx-auto drop-shadow-md">
-      Join Catapalooza in giving every stray cat and kitten a second chance.
-    </p>
-  </div>
+ {/* Text content */}
+<div className="relative z-10 text-center px-4 mt-[52vh] md:mt-24">  <h1 className="text-[2.7rem] md:text-7xl font-bold mb-4 drop-shadow-lg">
+    Changing Lives, One Cat at a Time.
+  </h1>
+  <p className="text-lg md:text-2xl max-w-md md:max-w-2xl mx-auto drop-shadow-md">
+        Join Catapalooza in giving every stray cat and kitten a second chance.
+  </p>
+</div>
 
-{/* SVG wave transition */}
-<svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#B6D9EF" d="M0,0 C720,100 720,100 1440,0 L1440,100 L0,100 Z" />
-</svg>
+  {/* SVG wave transition */}
+  <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#B6D9EF" d="M0,0 C720,100 720,100 1440,0 L1440,100 L0,100 Z" />
+  </svg>
 </motion.section>
 
 {/* Blue Section Above About */}
@@ -159,7 +173,7 @@ const Home = () => {
       <div className="text-gray-800">
 {/* About Section */}
 <motion.section
-  className="py-24 px-6 bg-[#e4f2f9]"
+  className="py-24 px-6 bg-[#f9fbfc]"
   initial="hidden"
   whileInView="visible"
   viewport={{ once: true }}
@@ -199,7 +213,54 @@ const Home = () => {
   </div>
 </motion.section>
 
+<motion.div
+  className="bg-[#e4f2f9] py-8 px-6 text-center"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={{
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.3
+      }
+    }
+  }}
+>
+  <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-[#1D3557]">
 
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+      }}
+    >
+      <h3 className="text-4xl font-bold">5,000+</h3>
+      <p className="text-lg mt-1">Cats Neutered</p>
+    </motion.div>
+
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+      }}
+    >
+      <h3 className="text-4xl font-bold">3,000+</h3>
+      <p className="text-lg mt-1">Cats Rehomed</p>
+    </motion.div>
+
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+      }}
+    >
+      <h3 className="text-4xl font-bold">1,200+</h3>
+      <p className="text-lg mt-1">Volunteers Since 2015</p>
+    </motion.div>
+
+  </div>
+</motion.div>
 
 <motion.section
   className="py-20 px-6 text-center bg-[#B6D9EF]"
@@ -253,7 +314,7 @@ const Home = () => {
 
         {/* Meet Our Furry Friends Section */}
         <motion.section
-          className="bg-[#f9fbfc] py-20 px-6 text-center overflow-visible"
+          className="bg-[#ffffff] py-20 px-6 text-center overflow-visible"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

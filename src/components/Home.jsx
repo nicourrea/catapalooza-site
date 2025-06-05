@@ -20,7 +20,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/mousewheel';
 import adoptionSuccess from '../assets/adoption_success.png';
 import donateCat from '../assets/donate-cat.png';
-import volunteer from '../assets/volunteers.jpg';
+import volunteer from '../assets/Volunteers1.jpg';
 import successStory from '../assets/success_stories.png';
 import TNRBackground from '../assets/lala3.jpeg';
 import mobile1 from '../assets/mobile1.png';

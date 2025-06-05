@@ -14,13 +14,16 @@ const EmailUs = () => {
             We’d love to hear from you!
           </p>
 
-          <a
-            href="mailto:catapaloozatnr@gmail.com"
-            className="mt-6 inline-flex items-center justify-center gap-3 bg-[#277DA1] hover:bg-[#1D3557] text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300"
-          >
-            <FiMail className="text-2xl" />
-            Email catapaloozatnr@gmail.com
-          </a>
+          {/* ✅ Fixed centering on mobile */}
+          <div className="flex justify-center mt-6">
+            <a
+              href="mailto:catapaloozatnr@gmail.com"
+              className="inline-flex items-center gap-3 bg-[#277DA1] hover:bg-[#1D3557] text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300"
+            >
+              <FiMail className="text-2xl" />
+              Email catapaloozatnr@gmail.com
+            </a>
+          </div>
 
           <p className="mt-6 text-base text-gray-600 leading-relaxed">
             We typically respond within 24–48 hours.<br />

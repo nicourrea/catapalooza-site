@@ -52,7 +52,7 @@ const supportOptions = [
     img: donateCat,
     mobileImg: mobile2,
     text: "Your donations help us fund critical medical procedures, food, shelter, and TNR efforts. Every dollar goes directly to the cats.",
-    link: "/howtohelp",
+    link: "/help/donate",
     buttonText: "Donate Now",
   },
   {
@@ -61,7 +61,7 @@ const supportOptions = [
     img: volunteer,
     mobileImg: mobile3,
     text: "Become a volunteer and help us with events, fosters, transport, and community outreach. We’re powered by people like you.",
-    link: "/howtohelp",
+    link: "/help/volunteer",
     buttonText: "Get Involved",
   },
   {

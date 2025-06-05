@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHandHoldingHeart, FaHeartbeat, FaChalkboardTeacher, FaRecycle } from 'react-icons/fa'; // Importing relevant icons
+import { FaHandHoldingHeart, FaHeartbeat, FaChalkboardTeacher, FaRecycle } from 'react-icons/fa';
 
 const OurMission = () => {
   return (
@@ -9,15 +9,15 @@ const OurMission = () => {
       </h1>
 
       <p className="mb-6 text-lg leading-relaxed">
-        At Catapalooza, our mission is to ensure that every cat we rescue finds its forever home in a safe and loving environment. We are committed to addressing the growing population of homeless cats in East Orlando through strategic efforts that involve rescue, medical care, and proactive community education.
+        At Catapalooza, our mission is to ensure that every cat we rescue finds its forever home in a safe and loving environment. We are committed to addressing the growing population of homeless cats in East Orlando through strategic efforts that involve rescue, medical care, proactive community education, and access to resources like low-cost veterinary services.
       </p>
 
       <p className="mb-6 text-lg leading-relaxed">
-        Our mission extends beyond just finding homes. We believe in creating sustainable change by addressing the root causes of overpopulation. Through our <strong className="text-[#277DA1]">Trap-Neuter-Release (TNR)</strong> program, we focus on managing the feral cat population to ensure healthier lives for outdoor cats while reducing the spread of diseases and preventing further breeding.
+        Our mission extends beyond just finding homes. We believe in creating sustainable change by addressing the root causes of overpopulation. Through our <strong className="text-[#277DA1]">Trap-Neuter-Return (TNR)</strong> program, we focus on managing the feral cat population to ensure healthier lives for outdoor cats while reducing the spread of diseases, preventing further breeding, and supporting the community with affordable vet care options.
       </p>
 
       <p className="mb-6 text-lg leading-relaxed">
-        We also strive to raise awareness about the importance of spaying and neutering, as well as responsible pet ownership. By educating the public, we aim to foster a culture of compassion where the lives of cats and all animals are valued, and the act of adoption becomes a first choice for families.
+        We also strive to raise awareness about the importance of spaying and neutering, as well as responsible pet ownership. By educating the public and offering services like low-cost spay/neuter programs, we aim to foster a culture of compassion where the lives of cats and all animals are valued, and the act of adoption becomes a first choice for families.
       </p>
 
       <h2 className="text-2xl font-bold mt-10 mb-4 text-[#277DA1]">Our Goals</h2>
@@ -70,7 +70,7 @@ const OurMission = () => {
             </h3>
           </div>
           <p className="text-sm text-center text-[#555]">
-            Our active TNR initiative helps address the root causes of overpopulation by managing the local feral cat communities.
+            Our active TNR initiative helps address the root causes of overpopulation by managing local feral cat colonies and supporting the community with low-cost vet services.
           </p>
         </div>
       </div>

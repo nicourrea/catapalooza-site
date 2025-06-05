@@ -14,7 +14,6 @@ const EmailUs = () => {
             We’d love to hear from you!
           </p>
 
-          {/* ✅ Fixed centering on mobile */}
           <div className="flex justify-center mt-6">
             <a
               href="mailto:catapaloozatnr@gmail.com"
@@ -40,11 +39,26 @@ const EmailUs = () => {
         <div className="text-left space-y-4 text-base text-[#1D3557]">
           <div className="flex items-start gap-2">
             <FaClock className="mt-1 text-[#277DA1]" />
-            <p><strong>Adoption Hours:</strong> Every Saturday and Sunday, 12–3 PM</p>
+            <div>
+              <p><strong>Adoption Hours:</strong> Every Saturday and Sunday, 12–3 PM</p>
+              <p className="text-sm text-gray-600 mt-1 italic">
+                *Adoption days do not take place on holidays.
+              </p>
+            </div>
           </div>
           <div className="flex items-start gap-2">
             <FaMapMarkerAlt className="mt-1 text-[#277DA1]" />
-            <p><strong>Location:</strong> Waterford Lakes PetSmart, Orlando, FL 32826</p>
+            <p>
+              <strong>Location:</strong> Waterford Lakes PetSmart,<br />
+              <a
+                href="https://maps.apple.com/?q=731+N+Alafaya+Trail,+Orlando,+FL+32828"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#277DA1] underline hover:text-[#1D3557]"
+              >
+                731 N Alafaya Trail, Orlando, FL 32828
+              </a>
+            </p>
           </div>
           <div className="mt-3 text-center text-sm">
             Want to stay updated? Check out our social media pages and say hello!

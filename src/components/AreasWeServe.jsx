@@ -7,8 +7,8 @@ const serviceAreas = [
   { zip: '32826', area: 'Bonneville' },
   { zip: '32820', area: 'Bithlo' },
   { zip: '32833', area: 'Christmas' },
-  { zip: '32825', area: 'Fairways' },
-  { zip: '32825', area: 'Deerwood' },
+  { zip: '32826', area: 'Fairways' },
+  { zip: '32828', area: 'Deerwood' },
 ];
 
 const AreasWeServe = () => {

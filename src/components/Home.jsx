@@ -243,22 +243,23 @@ const Home = () => {
         About Catapalooza
       </h2>
       <p className="text-gray-700 text-lg mb-4">
-        Catapalooza is a passionate nonprofit organization committed to rescuing, fostering, and rehoming stray and abandoned cats.
-        We believe every feline deserves a second chance at a loving life.
-      </p>
-      <p className="text-gray-700 text-lg mb-4">
-        Through dedicated volunteers and community outreach, we provide safe havens for cats in need, offer foster care services,
-        promote responsible pet ownership, and help match cats with their perfect forever families.
-      </p>
+  Catapalooza is a passionate nonprofit organization committed to rescuing, fostering, and rehoming stray and abandoned cats. We believe every feline deserves a second chance at a loving life.
+</p>
+<p className="text-gray-700 text-lg mb-4">
+  Through dedicated volunteers and community outreach, we provide safe havens for cats in need, offer foster care services, promote responsible pet ownership, and help match cats with their perfect forever families.
+</p>
+<p className="text-gray-700 text-lg text mb-4">
+  In addition to our adoption program, we run a Trap, Neuter, and Return (TNR) initiative, which helps reduce overpopulation and supports the community by providing resources like low-cost vet services.
+</p>
     </div>
 
     {/* Image Section */}
-    <div className="md:w-1/2 flex flex-col items-center relative group">
-      <Link to="/about" className="flex flex-col items-center">
+      <div className="md:w-1/2 flex flex-col justify-center items-center relative group">
+        <Link to="/about" className="flex flex-col items-center">
         <img
           src={CatLogo}
           alt="Catapalooza Logo"
-          className="w-72 h-72 object-contain transition-transform duration-300 group-hover:scale-105"
+            className="w-80 h-80 md:w-96 md:h-96 object-contain transition-transform duration-300 group-hover:scale-105"
         />
         <motion.p
           className="mt-2 text-[#3C8DBC] font-bold text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -304,7 +305,7 @@ const Home = () => {
       }}
     >
       <h3 className="text-4xl font-bold">2,000+</h3>
-      <p className="text-lg mt-1">Cats Rehomed</p>
+      <p className="text-lg mt-1">Cats Adopted</p>
     </motion.div>
 
     <motion.div
@@ -347,7 +348,7 @@ const Home = () => {
       <div className="w-52 h-52 rounded-full overflow-hidden shadow-xl hover:scale-105 transition duration-300">
         <img src={Neuter} alt="Neuter" className="object-cover w-full h-full" />
       </div>
-      <h3 className="text-2xl font-bold mt-6 mb-2">Neuter</h3>
+      <h3 className="text-2xl font-bold mt-6 mb-2">Neuter & Vaccinate</h3>
       <p className="text-base max-w-sm">
         Cats are spayed or neutered, vaccinated, and treated before returning home.
       </p>

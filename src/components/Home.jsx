@@ -395,7 +395,7 @@ const Home = () => {
       className="w-full h-[34rem] object-cover hidden md:block"
     />
 
-    {/* Buttons Grid - Mobile (2x2) | Desktop (inline) */}
+    {/* Buttons Grid */}
     <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-[90%] max-w-[20rem] grid grid-cols-2 gap-3 z-10 
                     md:flex md:justify-center md:gap-4 md:w-auto md:max-w-none md:left-1/2 md:top-6 md:transform">
       {supportOptions.map(({ label, key }) => (
@@ -413,26 +413,26 @@ const Home = () => {
       ))}
     </div>
 
-    {/* Floating Text Box - Responsive Positioning */}
+    {/* Floating Text Box */}
     <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 
                     md:left-auto md:right-8 md:transform-none 
                     bg-white bg-opacity-90 backdrop-blur-md rounded-xl p-6 
                     w-[90%] md:w-[22rem] shadow-lg text-left">
-      <Link
-        to={supportOptions.find((opt) => opt.key === selectedOption)?.link}
-        className="group inline-flex items-center gap-1 relative text-xl md:text-2xl font-bold mb-3 text-[#1D3557] transition-colors duration-300 ease-in-out hover:text-[#3C8DBC]"
-      >
-        {supportOptions.find((opt) => opt.key === selectedOption)?.label}
-        <span
-          className="inline-block transform transition-transform duration-300 group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
-          aria-hidden="true"
-        >
-          →
+      <Link to={supportOptions.find((opt) => opt.key === selectedOption)?.link}>
+        <span className="inline-flex items-center text-xl md:text-2xl font-bold mb-3 text-[#1D3557] group transition-colors duration-300 ease-in-out hover:text-[#3C8DBC]">
+          <span className="underline underline-offset-[6px] decoration-2 decoration-[#1D3557] group-hover:decoration-[#3C8DBC]">
+            {supportOptions.find((opt) => opt.key === selectedOption)?.label}
+          </span>
+          <span
+            className="ml-1 transition-transform duration-300 transform opacity-0 group-hover:translate-x-1 group-hover:opacity-100"
+            aria-hidden="true"
+          >
+            →
+          </span>
         </span>
-        <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#3C8DBC] transition-all duration-300 ease-in-out group-hover:w-full" />
       </Link>
 
-      <p className="text-sm md:text-base text-[#1D3557] leading-relaxed">
+      <p className="text-sm md:text-base text-[#1D3557] leading-relaxed mt-1">
         {supportOptions.find((opt) => opt.key === selectedOption)?.text}
       </p>
     </div>

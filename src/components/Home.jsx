@@ -9,6 +9,7 @@ import { Pagination, FreeMode, Mousewheel } from 'swiper/modules';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
 import CatLogo from '../assets/CCAT.png';
 import Trap from '../assets/Trap.png';
 import Neuter from '../assets/Nueter.png';
@@ -17,7 +18,15 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import 'swiper/css/mousewheel';
+import adoptionSuccess from '../assets/adoption_success.png';
+import donateCat from '../assets/donate-cat.png';
+import volunteer from '../assets/Volunteers.jpg';
+import successStory from '../assets/success_stories.png';
 import TNRBackground from '../assets/lala3.jpeg';
+import mobile1 from '../assets/mobile1.png';
+import mobile2 from '../assets/mobile2.png';
+import mobile3 from '../assets/mobile3.jpg';
+import mobile4 from '../assets/mobile4.png';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -26,6 +35,45 @@ const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };
+
+const supportOptions = [
+  {
+    label: "Adopt",
+    key: "adopt",
+    img: adoptionSuccess,
+    mobileImg: mobile1,
+    text: "Adopting from Catapalooza gives our cats the safe, loving homes they deserve. Learn how you can begin the adoption process today.",
+    link: "/cats",
+    buttonText: "View Cats",
+  },
+  {
+    label: "Donate",
+    key: "donate",
+    img: donateCat,
+    mobileImg: mobile2,
+    text: "Your donations help us fund critical medical procedures, food, shelter, and TNR efforts. Every dollar goes directly to the cats.",
+    link: "/howtohelp",
+    buttonText: "Donate Now",
+  },
+  {
+    label: "Volunteer",
+    key: "volunteer",
+    img: volunteer,
+    mobileImg: mobile3,
+    text: "Become a volunteer and help us with events, fosters, transport, and community outreach. We’re powered by people like you.",
+    link: "/howtohelp",
+    buttonText: "Get Involved",
+  },
+  {
+    label: "Join Us",
+    key: "join",
+    img: successStory,
+    mobileImg: mobile4,
+    text: "Get involved by joining us at an upcoming event! We host adoptions every Saturday and Sunday at PetSmart — come meet the team and be part of the Catapalooza family.",
+    link: "/events",
+    buttonText: "View Events",
+  },
+];
 
 const fadeStagger = {
   hidden: {},
@@ -44,6 +92,8 @@ const fadeItem = {
 const Home = () => {
   const [featuredCats, setFeaturedCats] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("adopt"); // ✅ MOVE THIS HERE
+
 
   useEffect(() => {
     const fetchCats = async () => {
@@ -233,16 +283,17 @@ const Home = () => {
       }
     }
   }}
+
 >
   <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-[#1D3557]">
-
+    {/* Stats Section */}
     <motion.div
       variants={{
         hidden: { opacity: 0, y: 40 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
       }}
     >
-      <h3 className="text-4xl font-bold">5,000+</h3>
+      <h3 className="text-4xl font-bold">1,500+</h3>
       <p className="text-lg mt-1">Cats Neutered</p>
     </motion.div>
 
@@ -252,7 +303,7 @@ const Home = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
       }}
     >
-      <h3 className="text-4xl font-bold">3,000+</h3>
+      <h3 className="text-4xl font-bold">2,000+</h3>
       <p className="text-lg mt-1">Cats Rehomed</p>
     </motion.div>
 
@@ -262,8 +313,8 @@ const Home = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
       }}
     >
-      <h3 className="text-4xl font-bold">1,200+</h3>
-      <p className="text-lg mt-1">Volunteers Since 2015</p>
+      <h3 className="text-4xl font-bold">75+</h3>
+      <p className="text-lg mt-1">Volunteers Since 2018</p>
     </motion.div>
 
   </div>
@@ -279,7 +330,7 @@ const Home = () => {
   <h2 className="text-4xl font-bold mb-12 text-[#1D3557]">The Purrfect Rescue Routine</h2>
 
   <div className="max-w-6xl mx-auto grid gap-16 grid-cols-1 md:grid-cols-3">
-    
+    {/* TNR Section */}
     {/* Trap */}
     <div className="flex flex-col items-center text-[#1D3557]">
       <div className="w-52 h-52 rounded-full overflow-hidden shadow-xl hover:scale-105 transition duration-300">
@@ -316,8 +367,77 @@ const Home = () => {
   </div>
 </motion.section>
 
+<motion.section
+  className="bg-[#E5F3FB] py-20 px-6 text-center"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={fadeUp}
+>
+  <h2 className="text-3xl md:text-4xl font-bold mb-12 text-[#1D3557]">
+    Supporting Catapalooza
+  </h2>
 
+  {/* Card */}
+  <div className="relative max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
 
+    {/* Mobile Image */}
+    <img
+      src={supportOptions.find((opt) => opt.key === selectedOption)?.mobileImg}
+      alt={selectedOption}
+      className="w-full h-[34rem] object-cover md:hidden"
+    />
+
+    {/* Desktop Image */}
+    <img
+      src={supportOptions.find((opt) => opt.key === selectedOption)?.img}
+      alt={selectedOption}
+      className="w-full h-[34rem] object-cover hidden md:block"
+    />
+
+    {/* Buttons Grid - Mobile (2x2) | Desktop (inline) */}
+    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-[90%] max-w-[20rem] grid grid-cols-2 gap-3 z-10 
+                    md:flex md:justify-center md:gap-4 md:w-auto md:max-w-none md:left-1/2 md:top-6 md:transform">
+      {supportOptions.map(({ label, key }) => (
+        <button
+          key={key}
+          onClick={() => setSelectedOption(key)}
+          className={`px-4 py-1.5 md:px-5 md:py-1.5 rounded-full border-2 text-sm md:text-[0.95rem] font-semibold transition backdrop-blur-sm ${
+            selectedOption === key
+              ? 'bg-[#1D3557] text-white border-[#1D3557]'
+              : 'text-[#1D3557] border-[#1D3557] bg-white bg-opacity-80 hover:bg-[#1D3557] hover:text-white'
+          }`}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+
+    {/* Floating Text Box - Responsive Positioning */}
+    <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 
+                    md:left-auto md:right-8 md:transform-none 
+                    bg-white bg-opacity-90 backdrop-blur-md rounded-xl p-6 
+                    w-[90%] md:w-[22rem] shadow-lg text-left">
+      <Link
+        to={supportOptions.find((opt) => opt.key === selectedOption)?.link}
+        className="group inline-flex items-center gap-1 relative text-xl md:text-2xl font-bold mb-3 text-[#1D3557] transition-colors duration-300 ease-in-out hover:text-[#3C8DBC]"
+      >
+        {supportOptions.find((opt) => opt.key === selectedOption)?.label}
+        <span
+          className="inline-block transform transition-transform duration-300 group-hover:translate-x-1 opacity-0 group-hover:opacity-100"
+          aria-hidden="true"
+        >
+          →
+        </span>
+        <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#3C8DBC] transition-all duration-300 ease-in-out group-hover:w-full" />
+      </Link>
+
+      <p className="text-sm md:text-base text-[#1D3557] leading-relaxed">
+        {supportOptions.find((opt) => opt.key === selectedOption)?.text}
+      </p>
+    </div>
+  </div>
+</motion.section>
 
         {/* Meet Our Furry Friends Section */}
         <motion.section

@@ -14,7 +14,7 @@ import CatLogo from '../assets/CCAT.png';
 import Trap from '../assets/Trap.png';
 import Neuter from '../assets/Nueter.png';
 import Release from '../assets/Release.png';
-import 'swiper/css';
+import { FaStethoscope, FaHome, FaHeart } from 'react-icons/fa';import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
 import 'swiper/css/mousewheel';
@@ -225,8 +225,6 @@ const Home = () => {
 
 
 
-
-
       <div className="text-gray-800">
 {/* About Section */}
 <motion.section
@@ -288,36 +286,47 @@ const Home = () => {
 >
   <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-[#1D3557]">
     {/* Stats Section */}
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 40 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-      }}
-    >
-      <h3 className="text-4xl font-bold">1,500+</h3>
-      <p className="text-lg mt-1">Cats Neutered</p>
-    </motion.div>
+    {/* Cats Neutered */}
+  <motion.div
+    variants={{
+      hidden: { opacity: 0, y: 40 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+    }}
+  >
+    <h3 className="text-4xl font-bold flex items-center justify-center gap-2">
+      <FaStethoscope className="text-[#277DA1]" />
+      1,500+
+    </h3>
+    <p className="text-lg mt-1">Cats Neutered</p>
+  </motion.div>
 
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 40 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-      }}
-    >
-      <h3 className="text-4xl font-bold">2,000+</h3>
-      <p className="text-lg mt-1">Cats Adopted</p>
-    </motion.div>
+  {/* Cats Adopted */}
+  <motion.div
+    variants={{
+      hidden: { opacity: 0, y: 40 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+    }}
+  >
+    <h3 className="text-4xl font-bold flex items-center justify-center gap-2">
+      <FaHome className="text-[#277DA1]" />
+      2,000+
+    </h3>
+    <p className="text-lg mt-1">Cats Adopted</p>
+  </motion.div>
 
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 40 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
-      }}
-    >
-      <h3 className="text-4xl font-bold">75+</h3>
-      <p className="text-lg mt-1">Volunteers Since 2018</p>
-    </motion.div>
-
+  {/* Volunteers */}
+  <motion.div
+    variants={{
+      hidden: { opacity: 0, y: 40 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+    }}
+  >
+    <h3 className="text-4xl font-bold flex items-center justify-center gap-2">
+      <FaHeart className="text-[#277DA1]" />
+      75+
+    </h3>
+    <p className="text-lg mt-1">Volunteers Since 2018</p>
+  </motion.div>
   </div>
 </motion.div>
 
